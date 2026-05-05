@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ploomes — Plataforma Comercial para Indústria</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--pp:#7443F6;--dp:#1E0C45;--lp:#EBE5FF;--pm:#610FC7;--pl:#AB82FF;--plr:#C7B0FF;--pf:#F5F2FF;--w:#fff;--deep:#0D0620;--teal:#1DB8A0;--amber:#F5A623;}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;background:var(--dp);color:var(--w);overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--dp)}::-webkit-scrollbar-thumb{background:var(--pp);border-radius:3px}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(13,6,32,.97);backdrop-filter:blur(18px);border-bottom:1px solid rgba(116,67,246,.1);height:64px;display:flex;align-items:center;padding:0 28px;justify-content:space-between;gap:12px}
+.nav-logo img{height:24px;filter:brightness(10);display:block}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{font-size:11px;font-weight:600;color:rgba(255,255,255,.5);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all .2s;white-space:nowrap}
+.nav-links a:hover{color:var(--w);background:rgba(116,67,246,.12)}
+.nav-amanda{background:rgba(116,67,246,.15)!important;border:1px solid rgba(116,67,246,.3)!important;color:var(--w)!important;font-weight:700!important}
+.nav-amanda:hover{background:rgba(116,67,246,.28)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hamburger span{width:20px;height:2px;background:rgba(255,255,255,.6);border-radius:2px;display:block}
+@media(max-width:960px){.nav-links{display:none;position:fixed;top:64px;left:0;right:0;flex-direction:column;background:rgba(13,6,32,.98);padding:12px;border-bottom:1px solid rgba(116,67,246,.1);z-index:299;align-items:flex-start}.nav-links.open{display:flex}.hamburger{display:flex}}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:110px 40px 80px;text-align:center;position:relative;overflow:hidden;background:var(--deep)}
+.hero-lines{position:absolute;inset:0;pointer-events:none}.hero-lines svg{width:100%;height:100%}
+.hero-inner{position:relative;z-index:2;max-width:860px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--pl);margin-bottom:22px;background:rgba(116,67,246,.1);border:1px solid rgba(116,67,246,.22);padding:6px 16px;border-radius:20px}
+h1{font-size:clamp(32px,5.5vw,62px);font-weight:800;line-height:1.08;letter-spacing:-1px;margin-bottom:18px}
+h1 em{font-family:'Lora',serif;font-style:italic;font-weight:600;color:var(--pl)}
+.hero-sub{font-size:16px;color:var(--plr);line-height:1.8;max-width:600px;margin:0 auto 32px}
+.hero-conviction{background:rgba(116,67,246,.08);border:1px solid rgba(116,67,246,.18);border-radius:14px;padding:20px 26px;max-width:680px;margin:0 auto 36px;font-size:14px;color:rgba(255,255,255,.68);line-height:1.8}
+.hero-conviction strong{color:var(--w);display:block;margin-bottom:5px;font-size:15px}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
+.btn{font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;padding:12px 26px;border-radius:8px;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:7px;cursor:pointer;border:none;letter-spacing:.2px}
+.btn-pp{background:var(--pp);color:var(--w)}.btn-pp:hover{background:#5c2ed4;transform:translateY(-1px)}
+.btn-outline{border:1.5px solid rgba(116,67,246,.45);color:var(--pl);background:transparent}.btn-outline:hover{border-color:var(--pp);color:var(--w);background:rgba(116,67,246,.08)}
+.btn-amanda{background:rgba(116,67,246,.18);border:1.5px solid rgba(116,67,246,.4);color:var(--w)}.btn-amanda:hover{background:rgba(116,67,246,.32);border-color:var(--pp)}
+.hstat-n{font-size:26px;font-weight:800;color:var(--w);line-height:1}.hstat-n em{font-family:'Lora',serif;font-style:italic;color:var(--pp)}
+.hstat-l{font-size:10px;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:.5px;text-transform:uppercase}
+.scroll-cue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;color:rgba(255,255,255,.18);font-size:10px;letter-spacing:2px;text-transform:uppercase;animation:bob 2.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(5px)}}
+section{padding:80px 40px}.wrap{max-width:1060px;margin:0 auto}.tc{text-align:center}
+.stag{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px}
+.stag-w{color:rgba(255,255,255,.3)}.stag-dk{color:var(--pm)}
+h2{font-size:clamp(24px,3.6vw,40px);font-weight:800;line-height:1.12;letter-spacing:-.5px;margin-bottom:12px}
+h2 em{font-family:'Lora',serif;font-style:italic;color:var(--pl)}
+.slead{font-size:14px;line-height:1.8;max-width:640px;margin:0 auto 52px}
+.slead-w{color:rgba(255,255,255,.48)}.slead-dk{color:#6a7090}
+.vs-grid{display:grid;grid-template-columns:1fr auto 1fr;border-radius:16px;overflow:hidden;border:1px solid rgba(116,67,246,.14)}
+.vs-col{padding:28px 24px}.vs-other{background:rgba(255,255,255,.025)}.vs-ploomes{background:rgba(116,67,246,.07)}
+.vs-mid{display:flex;align-items:center;justify-content:center;background:rgba(116,67,246,.1);padding:0 14px;border-left:1px solid rgba(116,67,246,.1);border-right:1px solid rgba(116,67,246,.1)}
+.vs-badge{background:var(--pp);color:var(--w);font-size:11px;font-weight:800;padding:7px 12px;border-radius:8px;writing-mode:vertical-rl;letter-spacing:1px}
+.vs-title{font-size:11px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}.vs-title.good{color:var(--pp)}
+.vs-list{display:flex;flex-direction:column;gap:10px}
+.vsi{display:flex;align-items:flex-start;gap:9px;font-size:12px;line-height:1.55}.vsi.bad{color:rgba(255,255,255,.58)}.vsi.good{color:rgba(255,255,255,.82)}
+@media(max-width:640px){.vs-grid{grid-template-columns:1fr}.vs-mid{writing-mode:horizontal-tb;padding:10px}.vs-badge{writing-mode:horizontal-tb}}
+.roi-tabs{display:flex;gap:0;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.07);max-width:700px;margin:0 auto 40px;flex-wrap:wrap}
+.roi-tab{flex:1;min-width:120px;padding:12px 8px;text-align:center;cursor:pointer;font-size:12px;font-weight:700;transition:all .25s;border:none;font-family:'Manrope',sans-serif;color:rgba(255,255,255,.4);background:rgba(255,255,255,.02);border-bottom:2px solid transparent;line-height:1.3}
+.roi-tab.active{background:rgba(116,67,246,.14);color:var(--pl);border-bottom-color:var(--pp)}
+.roi-panel{display:none;animation:fup .3s ease}.roi-panel.active{display:block}
+@keyframes fup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.roi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.roi-card{border-radius:12px;padding:22px;border:1px solid rgba(116,67,246,.14);background:rgba(116,67,246,.05);transition:all .25s;position:relative;overflow:hidden}
+.roi-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--pm),var(--pp))}
+.roi-card:hover{border-color:rgba(116,67,246,.3);background:rgba(116,67,246,.1)}
+.roi-icon{font-size:20px;margin-bottom:10px;display:block}.roi-title{font-size:14px;font-weight:700;margin-bottom:6px}.roi-desc{font-size:12px;color:rgba(255,255,255,.7);line-height:1.65}
+.roi-result{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.roi-tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px;background:rgba(116,67,246,.2);color:var(--pl)}
+.roi-tag.green{background:rgba(29,184,160,.15);color:var(--teal)}.roi-tag.amber{background:rgba(245,166,35,.15);color:var(--amber)}
+.seg-tabs{display:flex;gap:0;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.07);max-width:440px;margin:0 auto 40px}
+.seg-tab{flex:1;padding:13px 8px;text-align:center;cursor:pointer;font-size:12px;font-weight:700;transition:all .25s;border:none;font-family:'Manrope',sans-serif;color:rgba(255,255,255,.4);background:rgba(255,255,255,.02);border-bottom:2px solid transparent;line-height:1.3}
+.seg-tab small{font-size:10px;font-weight:400;opacity:.6;display:block;margin-top:2px}
+.seg-tab.ap{background:rgba(116,67,246,.14);color:var(--pp);border-bottom-color:var(--pp)}
+.seg-tab.am{background:rgba(245,166,35,.12);color:var(--amber);border-bottom-color:var(--amber)}
+.seg-tab.ag{background:rgba(29,184,160,.12);color:var(--teal);border-bottom-color:var(--teal)}
+.seg-panel{display:none;animation:fup .3s ease}.seg-panel.active{display:block}
+.seg-head{border-radius:12px;padding:22px 26px;margin-bottom:18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.seg-head.p{background:rgba(116,67,246,.07);border:1px solid rgba(116,67,246,.18)}
+.seg-head.m{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.18)}
+.seg-head.g{background:rgba(29,184,160,.06);border:1px solid rgba(29,184,160,.18)}
+.seg-badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
+.seg-badge.p{background:rgba(116,67,246,.2);color:var(--pl)}.seg-badge.m{background:rgba(245,166,35,.18);color:var(--amber)}.seg-badge.g{background:rgba(29,184,160,.18);color:var(--teal)}
+.seg-head h3{font-size:17px;font-weight:800;margin-bottom:3px}.seg-head p{font-size:12px;color:rgba(255,255,255,.45)}
+.sfeat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.sf{border-radius:11px;padding:18px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.025);transition:all .25s}
+.sf:hover{background:rgba(116,67,246,.08);border-color:rgba(116,67,246,.24)}
+.sf-ic{font-size:18px;margin-bottom:9px;display:block}.sf-t{font-size:13px;font-weight:700;margin-bottom:3px}.sf-d{font-size:11px;color:rgba(255,255,255,.62);line-height:1.6}
+.sf-tag{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;margin-top:7px;text-transform:uppercase;letter-spacing:.5px}
+.tag-now{background:rgba(29,184,160,.2);color:var(--teal)}.tag-rec{background:rgba(116,67,246,.2);color:var(--pl)}.tag-ent{background:rgba(245,166,35,.18);color:var(--amber)}
+.tipos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.tipo-card{background:var(--w);border-radius:13px;padding:22px;border:1px solid #e2d9ff;transition:all .3s;position:relative;overflow:hidden;cursor:default}
+.tipo-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pm),var(--pp));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.tipo-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(116,67,246,.1)}.tipo-card:hover::after{transform:scaleX(1)}
+.tipo-icon{width:42px;height:42px;border-radius:11px;background:#f0ecff;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
+.tipo-t{font-size:14px;font-weight:700;color:var(--dp);margin-bottom:5px}.tipo-d{font-size:12px;color:#4a5070;line-height:1.68}
+.tipo-pilares{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.tipo-pilar{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#ede8ff;color:var(--pm)}
+.tipo-pilar.cpq{background:#e8f0ff;color:#1a5bc4}.tipo-pilar.omni{background:#e8fff5;color:#0f7b52}.tipo-pilar.wf{background:#fff0e8;color:#c45a1a}
+.cpq-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.cpqi{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid rgba(116,67,246,.09)}.cpqi:last-child{border-bottom:none}
+.cpqi-ic{width:36px;height:36px;border-radius:9px;background:rgba(116,67,246,.18);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px}
+.cpqi-t{font-size:13px;font-weight:700;margin-bottom:3px}.cpqi-d{font-size:12px;color:rgba(255,255,255,.65);line-height:1.65}
+.cpq-demo{background:rgba(116,67,246,.06);border:1px solid rgba(116,67,246,.15);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.cpq-demo-title{font-size:11px;font-weight:700;color:var(--pl);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+.cpq-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:8px;font-size:12px;border:1px solid rgba(255,255,255,.05)}
+.cpq-row-label{color:rgba(255,255,255,.6)}.cpq-row-val{font-weight:700}.cpq-row-tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(116,67,246,.2);color:var(--pl)}
+.cpq-total{background:rgba(116,67,246,.15);border:1px solid rgba(116,67,246,.3);border-radius:10px;padding:14px;display:flex;justify-content:space-between;align-items:center}
+.cpq-total-label{font-size:13px;font-weight:700}.cpq-total-val{font-size:20px;font-weight:800;color:var(--pp)}
+@media(max-width:700px){.cpq-wrap{grid-template-columns:1fr}}
+.go-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.go-card{border-radius:13px;padding:24px;border:1px solid rgba(116,67,246,.14);background:rgba(116,67,246,.05);transition:all .25s}
+.go-card:hover{border-color:rgba(116,67,246,.3);background:rgba(116,67,246,.1)}
+.go-icon{font-size:26px;margin-bottom:12px;display:block}.go-t{font-size:14px;font-weight:700;margin-bottom:6px}.go-d{font-size:12px;color:rgba(255,255,255,.65);line-height:1.65}
+.go-benefits{display:flex;flex-direction:column;gap:4px;margin-top:12px}
+.go-benefit{font-size:11px;color:rgba(255,255,255,.72);display:flex;align-items:flex-start;gap:6px;line-height:1.5}
+.go-benefit::before{content:'→';color:var(--pp);flex-shrink:0}
+.gestao-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.gc{background:var(--w);border-radius:13px;padding:22px;border:1px solid #e2d9ff;transition:all .3s;position:relative;overflow:hidden}
+.gc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pm),var(--pp));transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.gc:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(116,67,246,.1)}.gc:hover::before{transform:scaleX(1)}
+.gc-icon{width:42px;height:42px;border-radius:11px;background:#f0ecff;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
+.gc-t{font-size:14px;font-weight:700;color:var(--dp);margin-bottom:5px}.gc-d{font-size:12px;color:#6a7090;line-height:1.68}
+.gc-val{font-size:11px;font-weight:700;color:var(--pm);margin-top:10px;padding-top:10px;border-top:1px solid #f0ecff}
+.funil-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.fstage{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:10px;margin-bottom:5px;border:1px solid rgba(116,67,246,.15);background:rgba(116,67,246,.05);transition:all .2s}
+.fstage:hover{border-color:rgba(116,67,246,.35);background:rgba(116,67,246,.12)}
+.fstage-num{width:26px;height:26px;border-radius:7px;background:var(--pp);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--w)}
+.fstage-t{font-size:13px;font-weight:700;margin-bottom:2px}.fstage-d{font-size:11px;color:rgba(255,255,255,.65)}.fstage-arrow{text-align:center;color:rgba(116,67,246,.35);font-size:11px;margin:1px 0}
+.finfo-card{background:rgba(116,67,246,.07);border:1px solid rgba(116,67,246,.15);border-radius:12px;padding:18px;margin-bottom:12px}
+.finfo-title{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.finfo-item{font-size:12px;color:rgba(255,255,255,.72);display:flex;align-items:flex-start;gap:7px;line-height:1.5;margin-bottom:5px}
+.finfo-item::before{content:'›';color:var(--pp);flex-shrink:0;margin-top:1px}
+@media(max-width:700px){.funil-wrap{grid-template-columns:1fr}}
+.canais-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:24px}
+.canal{border-radius:14px;padding:24px 20px;border:1px solid;transition:all .25s}
+.canal:hover{transform:translateY(-3px)}.canal.wp{background:rgba(37,211,102,.07);border-color:rgba(37,211,102,.2)}
+.canal.em{background:rgba(116,67,246,.07);border-color:rgba(116,67,246,.2)}.canal.tel{background:rgba(245,166,35,.07);border-color:rgba(245,166,35,.2)}
+.canal-icon{font-size:28px;margin-bottom:10px;display:block}.canal-name{font-size:14px;font-weight:700;margin-bottom:5px}
+.canal-desc{font-size:12px;color:rgba(255,255,255,.68);line-height:1.65;margin-bottom:12px}
+.canal-items{display:flex;flex-direction:column;gap:4px}
+.canal-item{font-size:11px;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:6px}
+.canal-item::before{content:'✓';font-weight:700;color:var(--teal);flex-shrink:0}
+@media(max-width:700px){.canais-grid{grid-template-columns:1fr}}
+.analytics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:24px}
+.acard{border-radius:13px;padding:22px;border:1px solid rgba(116,67,246,.14);background:rgba(116,67,246,.05);transition:all .25s}
+.acard:hover{border-color:rgba(116,67,246,.3);transform:translateY(-2px)}
+.acard-icon{font-size:22px;margin-bottom:10px;display:block}.acard-t{font-size:14px;font-weight:700;margin-bottom:5px}.acard-d{font-size:12px;color:rgba(255,255,255,.65);line-height:1.65}
+.acard-case{background:rgba(116,67,246,.1);border-radius:8px;padding:10px 12px;margin-top:12px;font-size:11px;color:rgba(255,255,255,.72);line-height:1.55}
+.acard-case strong{color:var(--teal);display:block;margin-bottom:3px}
+.ademo{background:rgba(116,67,246,.06);border:1px solid rgba(116,67,246,.14);border-radius:14px;padding:22px}
+.ademo-title{font-size:11px;font-weight:700;color:var(--pl);letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px}
+.ademo-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.akpi{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;text-align:center}
+.akpi-n{font-size:19px;font-weight:800;color:var(--pp)}.akpi-l{font-size:10px;color:rgba(255,255,255,.35);margin-top:3px}
+.abar-row{margin-bottom:9px}.abar-label{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.45);margin-bottom:4px}
+.abar-track{height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.abar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--pm),var(--pp))}
+@media(max-width:600px){.ademo-kpis{grid-template-columns:repeat(2,1fr)}}
+.auto-cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-bottom:28px}
+.autocat{border-radius:13px;padding:22px;border:1px solid rgba(116,67,246,.14);background:rgba(116,67,246,.05)}
+.autocat-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(116,67,246,.1)}
+.autocat-icon{font-size:20px}.autocat-title{font-size:14px;font-weight:700}.autocat-sub{font-size:11px;color:rgba(255,255,255,.58)}
+.ai2{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:12px;margin-bottom:7px;transition:border-color .2s}
+.ai2:hover{border-color:rgba(116,67,246,.25)}.ai2:last-child{margin-bottom:0}
+.ai2-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.ai2-dot.green{background:var(--teal)}.ai2-dot.purple{background:var(--pp)}.ai2-dot.amber{background:var(--amber)}
+.ai2-text{color:rgba(255,255,255,.78);line-height:1.5}.ai2-text strong{color:var(--w);display:block;margin-bottom:1px;font-size:11px}
+.catalogo-box{background:rgba(116,67,246,.07);border:1px solid rgba(116,67,246,.18);border-radius:13px;padding:24px}
+.cat-title{font-size:13px;font-weight:700;color:var(--pl);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.cat-tags{display:flex;flex-wrap:wrap;gap:7px}
+.cat-tag{background:rgba(116,67,246,.14);border:1px solid rgba(116,67,246,.22);border-radius:6px;padding:5px 11px;font-size:11px;font-weight:600;color:var(--pl);transition:all .2s}
+.cat-tag:hover{background:rgba(116,67,246,.26);color:var(--w)}
+.ia-wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.ia-items{display:flex;flex-direction:column;gap:13px}
+.iai{display:flex;gap:13px;align-items:flex-start;padding:17px;border-radius:12px;border:1px solid rgba(116,67,246,.13);background:rgba(116,67,246,.05);transition:border-color .2s}
+.iai:hover{border-color:rgba(116,67,246,.32)}
+.iai-ic{width:38px;height:38px;border-radius:9px;background:rgba(116,67,246,.2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.iai-t{font-size:13px;font-weight:700;margin-bottom:3px}.iai-d{font-size:12px;color:rgba(255,255,255,.65);line-height:1.65}
+.ia-chat{background:rgba(116,67,246,.07);border:1px solid rgba(116,67,246,.16);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.ia-chat-header{display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid rgba(116,67,246,.1);margin-bottom:4px}
+.ia-dot-live{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.ia-chat-title{font-size:11px;font-weight:700;color:var(--teal)}
+.msg{border-radius:10px;padding:11px 14px;font-size:12px;line-height:1.65;max-width:90%}
+.msg.user{background:rgba(116,67,246,.2);color:rgba(255,255,255,.9);margin-left:auto}
+.msg.ai{background:rgba(255,255,255,.05);color:rgba(255,255,255,.82)}
+.msg strong{color:var(--w);display:block;margin-bottom:3px;font-size:10px;text-transform:uppercase;letter-spacing:.5px}
+@media(max-width:700px){.ia-wrap{grid-template-columns:1fr}}
+.seg-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.sgc{border-radius:11px;padding:20px;border:1px solid rgba(116,67,246,.12);background:rgba(116,67,246,.04);transition:all .25s}
+.sgc:hover{border-color:rgba(116,67,246,.3);background:rgba(116,67,246,.09)}
+.sgc-icon{font-size:24px;margin-bottom:10px;display:block}.sgc-t{font-size:13px;font-weight:700;margin-bottom:4px}.sgc-d{font-size:11px;color:rgba(255,255,255,.62);line-height:1.65}
+.sgc-b{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--teal);margin-top:9px}
+.sgc-b::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal)}
+.dev-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.dex{border-radius:12px;border:1px solid #e2d9ff;background:var(--w);overflow:hidden;margin-bottom:16px}
+.dex-header{padding:12px 16px;background:#f0ecff;border-bottom:1px solid #e2d9ff;display:flex;align-items:center;gap:8px}
+.dex-dot{width:8px;height:8px;border-radius:50%;background:var(--pp)}.dex-title{font-size:12px;font-weight:700;color:var(--dp)}
+.dex-body{padding:16px}.dex-desc{font-size:12px;color:#6a7090;margin-bottom:10px;line-height:1.6}
+.code-block{background:#1E0C45;border-radius:8px;padding:14px;font-family:'Courier New',monospace;font-size:11px;color:#a8e6cf;line-height:1.7;overflow-x:auto}
+.code-block .kw{color:#c792ea}.code-block .str{color:#c3e88d}.code-block .cm{color:rgba(255,255,255,.3)}
+.devinfo{background:var(--w);border-radius:12px;padding:18px;border:1px solid #e2d9ff;margin-bottom:12px}
+.devinfo-t{font-size:13px;font-weight:700;color:var(--dp);margin-bottom:5px;display:flex;align-items:center;gap:7px}.devinfo-d{font-size:12px;color:#6a7090;line-height:1.65}
+@media(max-width:700px){.dev-wrap{grid-template-columns:1fr}}
+.suporte-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:20px}
+.sup{border-radius:12px;padding:20px;border:1px solid rgba(116,67,246,.12);background:rgba(116,67,246,.04);transition:all .25s}
+.sup:hover{border-color:rgba(116,67,246,.28);background:rgba(116,67,246,.09)}
+.sup-icon{font-size:22px;margin-bottom:9px;display:block}.sup-t{font-size:13px;font-weight:700;margin-bottom:4px}.sup-d{font-size:12px;color:rgba(255,255,255,.42);line-height:1.65}
+.sup-sla{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--teal);margin-top:9px}
+.sup-sla::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal)}
+.suporte-tip{background:rgba(116,67,246,.07);border:1px solid rgba(116,67,246,.16);border-radius:12px;padding:18px 22px;display:flex;align-items:flex-start;gap:12px}
+.integ-highlight{background:rgba(116,67,246,.07);border:1px solid rgba(116,67,246,.18);border-radius:13px;padding:22px;margin-bottom:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ihl{display:flex;gap:12px;align-items:flex-start}.ihl-ic{font-size:22px;flex-shrink:0}.ihl-t{font-size:13px;font-weight:700;margin-bottom:3px}.ihl-d{font-size:11px;color:rgba(255,255,255,.42);line-height:1.65}
+.idiv{display:flex;align-items:center;gap:10px;margin:20px 0 12px;color:rgba(255,255,255,.2);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.idiv::before,.idiv::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.05)}
+.igrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}
+.icard{border-radius:10px;padding:15px 12px;text-align:center;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);transition:all .25s}
+.icard:hover{background:rgba(116,67,246,.09);border-color:rgba(116,67,246,.24);transform:translateY(-2px)}
+.icard-ic{font-size:20px;display:block;margin-bottom:6px}.icard-n{font-size:12px;font-weight:600;margin-bottom:2px}.icard-t{font-size:10px;color:rgba(255,255,255,.3)}
+@media(max-width:580px){.integ-highlight{grid-template-columns:1fr}}
+.diag-sec{background:var(--dp);padding:80px 40px}.diag-container{max-width:760px;margin:0 auto}
+.diag-progress{background:rgba(116,67,246,.08);border:1px solid rgba(116,67,246,.18);border-radius:14px;padding:20px 24px;margin-bottom:26px}
+.diag-progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.diag-progress-title{font-size:13px;font-weight:700}.diag-score-display{font-size:22px;font-weight:800;color:var(--pp)}
+.diag-bar{height:10px;background:rgba(255,255,255,.08);border-radius:5px;overflow:hidden}
+.diag-bar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--pm),var(--pp));transition:width .5s ease;width:0%}
+.diag-score-label{font-size:12px;color:rgba(255,255,255,.42);margin-top:7px}
+.diag-categories{display:flex;flex-direction:column;gap:14px}
+.diag-cat{background:rgba(116,67,246,.05);border:1px solid rgba(116,67,246,.12);border-radius:12px;overflow:hidden}
+.diag-cat-header{padding:13px 17px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .2s}
+.diag-cat-header:hover{background:rgba(116,67,246,.08)}
+.diag-cat-title{font-size:13px;font-weight:700;display:flex;align-items:center;gap:9px}
+.diag-cat-score{font-size:12px;font-weight:700;color:var(--pl)}
+.diag-cat-arrow{font-size:12px;color:rgba(255,255,255,.3);transition:transform .2s}
+.diag-cat.open .diag-cat-arrow{transform:rotate(90deg)}
+.diag-cat-body{display:none;padding:0 17px 14px}.diag-cat.open .diag-cat-body{display:block}
+.diag-items{display:flex;flex-direction:column;gap:7px}
+.diag-item{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid rgba(116,67,246,.07)}.diag-item:last-child{border-bottom:none}
+.diag-check{width:20px;height:20px;border-radius:5px;border:2px solid rgba(116,67,246,.35);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
+.diag-check:hover{border-color:var(--pp)}.diag-check.checked{background:var(--pp);border-color:var(--pp)}.diag-check.checked::after{content:'✓';font-size:11px;color:var(--w);font-weight:700}
+.diag-item-text{flex:1}.diag-item-title{font-size:13px;font-weight:600;margin-bottom:2px}.diag-item-desc{font-size:11px;color:rgba(255,255,255,.58);line-height:1.55}
+.diag-result{background:rgba(116,67,246,.1);border:1px solid rgba(116,67,246,.25);border-radius:12px;padding:20px 24px;margin-top:22px;text-align:center;display:none}
+.diag-result.show{display:block}.diag-result-score{font-size:48px;font-weight:800;color:var(--pp);line-height:1}
+.diag-result-label{font-size:14px;color:var(--pl);margin-top:6px;margin-bottom:12px}.diag-result-msg{font-size:13px;color:rgba(255,255,255,.78);line-height:1.7}
+.diag-result-cta{display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:rgba(116,67,246,.2);border:1.5px solid rgba(116,67,246,.4);color:var(--w);font-weight:700;font-size:13px;padding:11px 22px;border-radius:8px;text-decoration:none;transition:all .2s}
+.diag-result-cta:hover{background:rgba(116,67,246,.35)}
+.csm-sec{background:var(--pp);padding:84px 40px;text-align:center;position:relative;overflow:hidden}
+.csm-sec::before{content:'';position:absolute;top:-70px;right:-70px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.05);pointer-events:none}
+.csm-sec::after{content:'';position:absolute;bottom:-60px;left:-40px;width:220px;height:220px;border-radius:50%;background:rgba(0,0,0,.07);pointer-events:none}
+.csm-inner{max-width:640px;margin:0 auto;position:relative;z-index:2}
+.csm-tag2{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px}
+.csm-h{font-size:clamp(22px,4vw,34px);font-weight:800;line-height:1.2;margin-bottom:12px}
+.csm-h em{font-family:'Lora',serif;font-style:italic;color:rgba(255,255,255,.85)}
+.csm-p{font-size:14px;color:rgba(255,255,255,.68);line-height:1.75;margin-bottom:30px;max-width:480px;margin-left:auto;margin-right:auto}
+.csm-card2{background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border-radius:14px;padding:22px 28px;margin-bottom:24px;display:inline-block}
+.csm-name{font-size:20px;font-weight:800;color:var(--w);margin-bottom:3px}.csm-role{font-size:12px;color:rgba(255,255,255,.62);margin-bottom:12px}
+.csm-line{width:32px;height:2px;background:rgba(255,255,255,.22);margin:0 auto 12px}.csm-contact-info{font-size:13px;color:rgba(255,255,255,.6)}
+.csm-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-wa-csm{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.35);color:var(--w);font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;padding:13px 28px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-wa-csm:hover{background:rgba(255,255,255,.25)}
+.btn-tel-csm{border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.8);font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;padding:12px 26px;border-radius:8px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:all .2s;background:transparent}
+.btn-tel-csm:hover{border-color:rgba(255,255,255,.5);color:var(--w)}
+footer{background:var(--deep);border-top:1px solid rgba(116,67,246,.06);padding:48px 40px 28px}
+.footer-wrap{max-width:1060px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:32px}
+.fb img{height:22px;filter:brightness(10);margin-bottom:12px;display:block}.fb p{font-size:11px;color:rgba(255,255,255,.26);line-height:1.7;max-width:195px}
+.fc h4{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.26);margin-bottom:12px}
+.fc a{display:block;font-size:12px;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:6px;transition:color .2s}.fc a:hover{color:var(--pl)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.04);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.18)}
+@media(max-width:680px){.footer-top{grid-template-columns:1fr 1fr}}
+.fi{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}.fi.vis{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body><nav>
+  <div class="nav-logo"><img src="data:image/png;base64,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" alt="Ploomes"></div>
+  <div class="nav-links" id="navMenu">
+    <a href="#roi">Objetivos</a>
+    <a href="#segmentos">Seu perfil</a>
+    <a href="#tipos-venda">Tipos de Venda</a>
+    <a href="#cpq">CPQ</a>
+    <a href="#gestao-op">Gestão Operacional</a>
+    <a href="#analytics">Analytics</a>
+    <a href="#ia">IA</a>
+    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#csm" class="nav-amanda"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Amanda</a>
+  </div>
+  <div class="hamburger" onclick="document.getElementById('navMenu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav><section class="hero" id="inicio">
+  <div class="hero-lines">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-80,180 Q320,80 720,200 Q1080,300 1520,140" stroke="#7443F6" stroke-width="1.2" fill="none" opacity=".2"/>
+      <path d="M-80,290 Q360,170 780,295 Q1120,395 1520,250" stroke="#7443F6" stroke-width=".9" fill="none" opacity=".14"/>
+      <path d="M-80,430 Q400,330 820,440 Q1160,530 1520,380" stroke="#7443F6" stroke-width=".7" fill="none" opacity=".1"/>
+      <path d="M-80,580 Q320,680 720,580 Q1080,480 1520,640" stroke="#7443F6" stroke-width="1.2" fill="none" opacity=".2"/>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <div class="eyebrow">✦ Material Exclusivo · Gerente de Contas Ploomes</div>
+    <h1>Você já tem tudo<br>que precisa para crescer.<br><em>Use o potencial completo.</em></h1>
+    <p class="hero-sub">Da prospecção ao pós-venda, do pedido simples ao CPQ complexo, da gestão de carteira à análise preditiva com IA — tudo em uma plataforma robusta, sem sistemas paralelos.</p>
+    <div class="hero-conviction">
+      <strong>Por que este material foi preparado para você?</strong>
+      A maioria das empresas usa menos de 40% do Ploomes. Sua Gerente de Contas preparou este guia para mostrar o que já está disponível na sua conta — e o que pode ser ativado hoje para gerar resultado real.
+    </div>
+    <div class="hero-btns">
+      <a href="#diagnostico" class="btn btn-pp">Fazer meu diagnóstico</a>
+      <a href="#roi" class="btn btn-outline">Ver objetivos estratégicos</a>
+      <a href="https://wa.me/5511934012924" target="_blank" class="btn btn-amanda"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Falar com Amanda</a>
+    </div>
+    <div style="display:flex;justify-content:center;gap:44px;flex-wrap:wrap">
+      <div><div class="hstat-n">2.600<em>+</em></div><div class="hstat-l">Clientes ativos</div></div>
+      <div><div class="hstat-n">N<em>º</em>1</div><div class="hstat-l">CRM América Latina</div></div>
+      <div><div class="hstat-n">40<em>+</em></div><div class="hstat-l">Funcionalidades nativas</div></div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <svg width="13" height="19" viewBox="0 0 13 19" fill="none"><rect x=".75" y=".75" width="11.5" height="17.5" rx="5.75" stroke="white" stroke-width="1.5"/><circle cx="6.5" cy="5.5" r="1.5" fill="white"/></svg>
+    scroll
+  </div>
+</section><section style="background:var(--deep);padding:80px 40px" id="antimig">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:44px">
+      <div class="stag stag-w">A decisão certa</div>
+      <h2>Antes de trocar de sistema,<br><em>veja o que já existe aqui</em></h2>
+      <p class="slead slead-w">Migrar tem um custo oculto enorme. O Ploomes já cobre o que você está buscando em outra ferramenta — com a vantagem de todo o histórico comercial já estar aqui.</p>
+    </div>
+    <div class="vs-grid">
+      <div class="vs-col vs-other">
+        <div class="vs-title">Trocar ou adicionar sistema</div>
+        <div class="vs-list">
+          <div class="vsi bad"><span>⚠️</span>Histórico comercial e de carteira perdido na migração</div>
+          <div class="vsi bad"><span>⚠️</span>Curva de aprendizado de toda a equipe de vendas e campo</div>
+          <div class="vsi bad"><span>⚠️</span>Integrações com ERP reconstruídas do zero com custo alto</div>
+          <div class="vsi bad"><span>⚠️</span>Meses de implantação antes de ver resultado na operação</div>
+          <div class="vsi bad"><span>⚠️</span>Custo extra de licença, implantação e sustentação técnica</div>
+          <div class="vsi bad"><span>⚠️</span>Resistência do time comercial e de representantes à nova ferramenta</div>
+          <div class="vsi bad"><span>⚠️</span>Dados de distribuidores e contratos duplicados ou perdidos</div>
+        </div>
+      </div>
+      <div class="vs-mid"><div class="vs-badge">VS</div></div>
+      <div class="vs-col vs-ploomes">
+        <div class="vs-title good">Ativar o Ploomes completo</div>
+        <div class="vs-list">
+          <div class="vsi good"><span>✅</span>Todo histórico de clientes, contratos e carteira já está aqui</div>
+          <div class="vsi good"><span>✅</span>Time comercial e representantes já conhecem a plataforma</div>
+          <div class="vsi good"><span>✅</span>Integrações com ERP, e-mail e Calendar já existem</div>
+          <div class="vsi good"><span>✅</span>Ativação em dias, com apoio da Gerente de Contas Amanda</div>
+          <div class="vsi good"><span>✅</span>Custo dentro do contrato atual — sem surpresa no budget</div>
+          <div class="vsi good"><span>✅</span>Adoção natural — mesma interface do dia a dia da equipe</div>
+          <div class="vsi good"><span>✅</span>Carteira de distribuidores e contratos já segmentados</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><section style="background:var(--dp);padding:80px 40px" id="roi">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:40px">
+      <div class="stag stag-w">Objetivos Estratégicos</div>
+      <h2>Qual é o seu<br><em>principal objetivo agora?</em></h2>
+      <p class="slead slead-w">Selecione o objetivo e veja como o Ploomes entrega resultado concreto — baseado em ROI mapeado para operações industriais.</p>
+    </div>
+    <div class="roi-tabs">
+      <button class="roi-tab active" onclick="openRoi('conversao',this)">📈 Aumentar Conversão</button>
+      <button class="roi-tab" onclick="openRoi('reativar',this)">🔁 Reativar Clientes</button>
+      <button class="roi-tab" onclick="openRoi('eficiencia',this)">⚡ Ganhar Eficiência</button>
+      <button class="roi-tab" onclick="openRoi('carteira',this)">🗂 Gerir Carteira</button>
+      <button class="roi-tab" onclick="openRoi('escala',this)">🚀 Escalar Canais</button>
+    </div>
+    <div class="roi-panel active" id="roi-conversao">
+      <div class="roi-grid">
+        <div class="roi-card"><span class="roi-icon">🎯</span><div class="roi-title">Lead Score automático por perfil industrial</div><div class="roi-desc">Classifique automaticamente distribuidores e prospects por porte, região, mix de produtos e comportamento. O representante foca no que tem mais chance de fechar.</div><div class="roi-result"><span class="roi-tag green">+ Taxa de conversão</span><span class="roi-tag">+ Volume por vendedor</span></div></div>
+        <div class="roi-card"><span class="roi-icon">⏱</span><div class="roi-title">CPQ reduz ciclo de vendas</div><div class="roi-desc">Proposta com vínculos de produtos, kits e tabela de preço por distribuidor gerada em minutos. Fluxo de aprovação de desconto sem e-mail ou WhatsApp.</div><div class="roi-result"><span class="roi-tag green">- Ciclo de vendas</span><span class="roi-tag amber">+ Margem</span></div></div>
+        <div class="roi-card"><span class="roi-icon">📋</span><div class="roi-title">Follow-up nunca esquecido</div><div class="roi-desc">Cadências automáticas e alertas de SLA garantem que o representante aja no momento certo — sem depender de memória ou anotação em papel.</div><div class="roi-result"><span class="roi-tag green">+ Propostas ativas</span><span class="roi-tag">- Oportunidades perdidas</span></div></div>
+        <div class="roi-card"><span class="roi-icon">📊</span><div class="roi-title">Forecast confiável para o gestor</div><div class="roi-desc">Pipeline em tempo real com probabilidade por etapa. Diretor lidera com dados — não com feeling. Reuniões de pipeline mais rápidas e precisas.</div><div class="roi-result"><span class="roi-tag">+ Liderança comercial</span><span class="roi-tag green">+ Previsibilidade</span></div></div>
+      </div>
+    </div>
+    <div class="roi-panel" id="roi-reativar">
+      <div class="roi-grid">
+        <div class="roi-card"><span class="roi-icon">🔁</span><div class="roi-title">Funil de retomada de leads perdidos</div><div class="roi-desc">Leads que não avançaram entram automaticamente em régua de reengajamento — e-mail, WhatsApp e tarefas para o representante retomar no momento certo.</div><div class="roi-result"><span class="roi-tag green">+ Oportunidades reativadas</span><span class="roi-tag">ROI em leads já pagos</span></div></div>
+        <div class="roi-card"><span class="roi-icon">📉</span><div class="roi-title">Alerta de distribuidores e clientes inativos</div><div class="roi-desc">Distribuidores ou clientes que param de comprar são identificados automaticamente. Representante recebe alerta e age antes que o cliente vá para o concorrente.</div><div class="roi-result"><span class="roi-tag green">- Perda de carteira</span><span class="roi-tag amber">+ Reativações</span></div></div>
+        <div class="roi-card"><span class="roi-icon">🛒</span><div class="roi-title">Expansão de mix de produtos</div><div class="roi-desc">Histórico de compras revela o que cada cliente compra e o que ainda não comprou. Representante aborda com proposta certeira no produto ou linha certa.</div><div class="roi-result"><span class="roi-tag green">+ Mix por cliente</span><span class="roi-tag">+ Ticket médio</span></div></div>
+        <div class="roi-card"><span class="roi-icon">📅</span><div class="roi-title">Régua automática de renovação</div><div class="roi-desc">Contratos de fornecimento entram em régua automática 90, 60 e 30 dias antes do vencimento. Nenhuma renovação perdida por falta de antecipação.</div><div class="roi-result"><span class="roi-tag green">+ Taxa de renovação</span><span class="roi-tag">- Receita perdida</span></div></div>
+      </div>
+    </div>
+    <div class="roi-panel" id="roi-eficiencia">
+      <div class="roi-grid">
+        <div class="roi-card"><span class="roi-icon">⚡</span><div class="roi-title">Proposta complexa em minutos, não horas</div><div class="roi-desc">Vínculos de produtos, kits, tabelas de preço por distribuidor e regras de desconto automatizados. Representante gera proposta completa sem erros — no escritório ou no campo.</div><div class="roi-result"><span class="roi-tag green">- Tempo por proposta</span><span class="roi-tag amber">- Erros de preço</span></div></div>
+        <div class="roi-card"><span class="roi-icon">📱</span><div class="roi-title">Representante autônomo no campo</div><div class="roi-desc">App mobile com catálogo, pedidos, check-in e histórico do cliente. Fecha pedido na frente do cliente — integrado ao ERP em tempo real, sem redigitação.</div><div class="roi-result"><span class="roi-tag green">+ Pedidos por visita</span><span class="roi-tag">- Retrabalho backoffice</span></div></div>
+        <div class="roi-card"><span class="roi-icon">✅</span><div class="roi-title">Aprovação de desconto sem atrito</div><div class="roi-desc">Alçadas configuradas por valor e percentual. Gerente aprova em segundos pelo celular. Histórico imutável de cada aprovação para auditoria e controle de margem.</div><div class="roi-result"><span class="roi-tag amber">+ Margem protegida</span><span class="roi-tag green">- Tempo de aprovação</span></div></div>
+        <div class="roi-card"><span class="roi-icon">📄</span><div class="roi-title">Documentos e contratos automáticos</div><div class="roi-desc">Contratos de fornecimento, pedidos e propostas gerados com dados do CRM. Nenhuma digitação manual, nenhuma cópia de planilha para o sistema.</div><div class="roi-result"><span class="roi-tag green">- Retrabalho operacional</span><span class="roi-tag">- Erros em contratos</span></div></div>
+      </div>
+    </div>
+    <div class="roi-panel" id="roi-carteira">
+      <div class="roi-grid">
+        <div class="roi-card"><span class="roi-icon">🗂</span><div class="roi-title">Carteiramento automático por território</div><div class="roi-desc">Distribuidores e clientes distribuídos automaticamente por região, segmento ou porte. Gestor define as regras, o Ploomes executa sem intervenção manual.</div><div class="roi-result"><span class="roi-tag green">+ Cobertura da carteira</span><span class="roi-tag">- Conflito de contas</span></div></div>
+        <div class="roi-card"><span class="roi-icon">🤖</span><div class="roi-title">IA detecta risco antes da perda</div><div class="roi-desc">A IA analisa queda de volume, frequência de compra e histórico para indicar quais clientes e distribuidores estão em risco — antes de qualquer sinal visível.</div><div class="roi-result"><span class="roi-tag green">- Perda de clientes</span><span class="roi-tag amber">+ Retenção</span></div></div>
+        <div class="roi-card"><span class="roi-icon">📈</span><div class="roi-title">Share of wallet por distribuidor</div><div class="roi-desc">Acompanhe o volume comprado versus o potencial de cada distribuidor. Identifique quem está comprando do concorrente e direcione a ação da equipe.</div><div class="roi-result"><span class="roi-tag green">+ Volume por canal</span><span class="roi-tag">+ Mix de produtos</span></div></div>
+        <div class="roi-card"><span class="roi-icon">🔢</span><div class="roi-title">Campos acumuladores de histórico</div><div class="roi-desc">Total comprado por período, frequência de pedidos, mix adquirido — calculados automaticamente. Representante tem o contexto completo na hora da visita.</div><div class="roi-result"><span class="roi-tag green">+ Qualidade da abordagem</span><span class="roi-tag">+ Upsell</span></div></div>
+      </div>
+    </div>
+    <div class="roi-panel" id="roi-escala">
+      <div class="roi-grid">
+        <div class="roi-card"><span class="roi-icon">🤝</span><div class="roi-title">Gestão da rede de distribuidores</div><div class="roi-desc">Funil de captação, habilitação, tabelas de preço personalizadas e acompanhamento de desempenho por canal — tudo no Ploomes, sem planilha paralela.</div><div class="roi-result"><span class="roi-tag green">+ Canais ativos</span><span class="roi-tag">+ Sell-out por canal</span></div></div>
+        <div class="roi-card"><span class="roi-icon">📋</span><div class="roi-title">Handoff vendas → pós-venda automático</div><div class="roi-desc">Ao fechar uma venda, o card de instalação, assistência técnica ou pós-venda é criado automaticamente — com contexto da negociação e responsável já atribuído.</div><div class="roi-result"><span class="roi-tag green">- Perda de contexto</span><span class="roi-tag">+ Experiência do cliente</span></div></div>
+        <div class="roi-card"><span class="roi-icon">📊</span><div class="roi-title">Visibilidade da rede em tempo real</div><div class="roi-desc">Gestor de canais vê performance de toda a rede — volume, conversão, atividade recente e canais em risco de inatividade — em um único painel.</div><div class="roi-result"><span class="roi-tag green">+ Capacidade de gestão</span><span class="roi-tag amber">- Canais inativos</span></div></div>
+        <div class="roi-card"><span class="roi-icon">📱</span><div class="roi-title">Representante e revendedor autônomos</div><div class="roi-desc">CPQ disponível também para parceiros gerarem suas próprias propostas e pedidos — com as regras de preço e desconto definidas e controladas pelo fornecedor.</div><div class="roi-result"><span class="roi-tag green">+ Volume de canais</span><span class="roi-tag">- Custo por venda</span></div></div>
+      </div>
+    </div>
+  </div>
+</section><section style="background:var(--deep);padding:80px 40px" id="segmentos">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:38px">
+      <div class="stag stag-w">Perfil da Empresa</div>
+      <h2>Recursos certos para<br>o seu <em>momento</em></h2>
+      <p class="slead slead-w">O Ploomes se adapta ao porte e à complexidade da sua operação industrial.</p>
+    </div>
+    <div class="seg-tabs">
+      <button class="seg-tab ap" onclick="openSeg('p',this)">Pequena (P)<small>Estruturando o processo</small></button>
+      <button class="seg-tab" onclick="openSeg('m',this)">Média (M)<small>Escala com controle</small></button>
+      <button class="seg-tab" onclick="openSeg('g',this)">Grande (G)<small>Operação complexa</small></button>
+    </div>
+    <div class="seg-panel active" id="panel-p">
+      <div class="seg-head p"><span class="seg-badge p">Pequena (P)</span><div><h3>Fundação comercial sólida</h3><p>Organize o processo, centralize o histórico e automatize o básico que já gera resultado.</p></div></div>
+      <div class="sfeat-grid">
+        <div class="sf"><span class="sf-ic">🗂</span><div class="sf-t">Funil de vendas estruturado</div><div class="sf-d">Pipeline com etapas que refletem o processo real da indústria.</div><span class="sf-tag tag-rec">Essencial</span></div>
+        <div class="sf"><span class="sf-ic">📄</span><div class="sf-t">CPQ: propostas e pedidos</div><div class="sf-d">Catálogo de produtos com preços e condições — proposta em cliques.</div><span class="sf-tag tag-rec">Essencial</span></div>
+        <div class="sf"><span class="sf-ic">📧</span><div class="sf-t">E-mails e WhatsApp automáticos</div><div class="sf-d">Follow-up disparado por eventos do funil sem ação manual do vendedor.</div><span class="sf-tag tag-now">Ativar agora</span></div>
+        <div class="sf"><span class="sf-ic">⭐</span><div class="sf-t">Lead Score automático</div><div class="sf-d">Priorize os melhores distribuidores e leads via Campo Dev.</div><span class="sf-tag tag-now">Ativar agora</span></div>
+        <div class="sf"><span class="sf-ic">📅</span><div class="sf-t">Google Calendar integrado</div><div class="sf-d">Visitas e reuniões sincronizadas com a agenda do representante.</div><span class="sf-tag tag-now">Ativar agora</span></div>
+        <div class="sf"><span class="sf-ic">📱</span><div class="sf-t">App mobile para representantes</div><div class="sf-d">Pedidos, catálogo e check-in pelo celular em campo.</div><span class="sf-tag tag-now">Ativar agora</span></div>
+      </div>
+    </div>
+    <div class="seg-panel" id="panel-m">
+      <div class="seg-head m"><span class="seg-badge m">Média (M)</span><div><h3>Operação integrada e controlada</h3><p>Processo definido que precisa de CPQ avançado, automações e gestão de distribuidores.</p></div></div>
+      <div class="sfeat-grid">
+        <div class="sf"><span class="sf-ic">🔢</span><div class="sf-t">CPQ com vínculos de kits e produtos</div><div class="sf-d">Combos, kits, dependências e tabelas de preço por distribuidor automatizados.</div><span class="sf-tag tag-rec">Recomendado</span></div>
+        <div class="sf"><span class="sf-ic">✅</span><div class="sf-t">Fluxo de aprovação de desconto</div><div class="sf-d">Alçadas com notificação e auditoria completa — sem aprovação por WhatsApp.</div><span class="sf-tag tag-rec">Recomendado</span></div>
+        <div class="sf"><span class="sf-ic">🤝</span><div class="sf-t">Gestão de distribuidores</div><div class="sf-d">Tabelas por canal, funil de captação e desempenho por distribuidor.</div><span class="sf-tag tag-now">Ativar agora</span></div>
+        <div class="sf"><span class="sf-ic">🔗</span><div class="sf-t">Processos paralelos</div><div class="sf-d">Venda fechada abre automaticamente pós-venda ou assistência técnica.</div><span class="sf-tag tag-now">Ativar agora</span></div>
+        <div class="sf"><span class="sf-ic">🔢</span><div class="sf-t">Campos acumuladores</div><div class="sf-d">Volume, frequência e mix de compra calculados automaticamente por cliente.</div><span class="sf-tag tag-now">Ativar agora</span></div>
+        <div class="sf"><span class="sf-ic">⚙️</span><div class="sf-t">Automações periódicas</div><div class="sf-d">Alertas de inatividade, réguas de renovação e relatórios automáticos para o gestor.</div><span class="sf-tag tag-now">Ativar agora</span></div>
+      </div>
+    </div>
+    <div class="seg-panel" id="panel-g">
+      <div class="seg-head g"><span class="seg-badge g">Grande (G)</span><div><h3>Plataforma para operação complexa</h3><p>Alto volume, múltiplos canais, gestão de contratos, equipamentos e inteligência artificial.</p></div></div>
+      <div class="sfeat-grid">
+        <div class="sf"><span class="sf-ic">📋</span><div class="sf-t">Gestão de contratos de fornecimento</div><div class="sf-d">Controle de vencimentos, reajustes, aditivos e histórico completo por cliente.</div><span class="sf-tag tag-ent">Enterprise</span></div>
+        <div class="sf"><span class="sf-ic">🔧</span><div class="sf-t">Gestão de equipamentos instalados</div><div class="sf-d">Histórico de ativos por cliente, alertas de manutenção e ciclo de substituição.</div><span class="sf-tag tag-ent">Enterprise</span></div>
+        <div class="sf"><span class="sf-ic">🤖</span><div class="sf-t">IA de gestão de carteira</div><div class="sf-d">Score de saúde, risco de perda e oportunidades de expansão identificados pela IA.</div><span class="sf-tag tag-ent">Enterprise</span></div>
+        <div class="sf"><span class="sf-ic">🎙</span><div class="sf-t">Transcrição de visitas via IA</div><div class="sf-d">Visitas técnicas e reuniões transcritas e vinculadas ao card do cliente.</div><span class="sf-tag tag-ent">Enterprise</span></div>
+        <div class="sf"><span class="sf-ic">🔐</span><div class="sf-t">Segurança enterprise</div><div class="sf-d">MFA, controle granular por perfil, auditoria completa e criptografia AES-256.</div><span class="sf-tag tag-ent">Enterprise</span></div>
+        <div class="sf"><span class="sf-ic">📈</span><div class="sf-t">Alto volume de dados</div><div class="sf-d">+50M registros, infraestrutura elástica e API com menos de 200ms de resposta.</div><span class="sf-tag tag-ent">Enterprise</span></div>
+      </div>
+    </div>
+  </div>
+</section><section style="background:var(--pf);padding:80px 40px" id="tipos-venda">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-dk">Modelos Comerciais</div>
+      <h2 style="color:var(--dp)">O Ploomes entende<br><em style="color:var(--pm)">como a indústria vende</em></h2>
+      <p class="slead slead-dk">A indústria não tem um único modelo de venda. O Ploomes foi construído para cobrir todos eles — do representante em campo ao gestor de distribuidores.</p>
+    </div>
+    <div class="tipos-grid">
+      <div class="tipo-card"><div class="tipo-icon">📦</div><div class="tipo-t">Venda para Distribuidores</div><div class="tipo-d">Gestão de rede com tabelas de preço por canal, funil de captação e acompanhamento de sell-out e desempenho por distribuidor.</div><div class="tipo-pilares"><span class="tipo-pilar">CRM</span><span class="tipo-pilar cpq">CPQ</span><span class="tipo-pilar wf">Workflow</span></div></div>
+      <div class="tipo-card"><div class="tipo-icon">🏪</div><div class="tipo-t">Venda para Comércio</div><div class="tipo-d">Visitas periódicas com tiragem de pedido em campo. Controle de positivação da carteira, mix por ponto de venda e reativação de inativos.</div><div class="tipo-pilares"><span class="tipo-pilar">CRM</span><span class="tipo-pilar cpq">Força de Vendas</span><span class="tipo-pilar omni">Omni</span></div></div>
+      <div class="tipo-card"><div class="tipo-icon">🔁</div><div class="tipo-t">Venda de Reposição Industrial</div><div class="tipo-d">Consumíveis com compra frequente. Alertas de queda de consumo, acordos de preço por cliente e campanhas segmentadas por mix.</div><div class="tipo-pilares"><span class="tipo-pilar">CRM</span><span class="tipo-pilar omni">Omni</span><span class="tipo-pilar cpq">CPQ</span></div></div>
+      <div class="tipo-card"><div class="tipo-icon">🏭</div><div class="tipo-t">Venda para Industrialização</div><div class="tipo-d">Insumos com contratos e consumo mínimo. Monitoramento de share of wallet e alertas de queda abaixo do volume contratado.</div><div class="tipo-pilares"><span class="tipo-pilar">CRM</span><span class="tipo-pilar wf">Workflow</span><span class="tipo-pilar cpq">CPQ</span></div></div>
+      <div class="tipo-card"><div class="tipo-icon">🔧</div><div class="tipo-t">Projetos Técnicos</div><div class="tipo-d">Vendas longas e complexas com orçamentos técnicos, validações internas e múltiplos departamentos. CPQ com configuração de produtos customizados.</div><div class="tipo-pilares"><span class="tipo-pilar">CRM</span><span class="tipo-pilar cpq">CPQ</span><span class="tipo-pilar wf">Workflow</span></div></div>
+      <div class="tipo-card"><div class="tipo-icon">🛠</div><div class="tipo-t">Assistência Técnica</div><div class="tipo-d">Orçamentos de peças e serviços em campo, histórico de equipamentos por cliente, alertas de manutenção preventiva e gestão de chamados.</div><div class="tipo-pilares"><span class="tipo-pilar">CRM</span><span class="tipo-pilar cpq">CPQ</span><span class="tipo-pilar omni">Omni</span></div></div>
+      <div class="tipo-card"><div class="tipo-icon">📋</div><div class="tipo-t">Renovação de Contratos</div><div class="tipo-d">Régua automática com alertas antecipados, funil de renegociação e geração de aditivos com condições e reajustes atualizados.</div><div class="tipo-pilares"><span class="tipo-pilar">CRM</span><span class="tipo-pilar wf">Workflow</span><span class="tipo-pilar cpq">CPQ</span></div></div>
+      <div class="tipo-card"><div class="tipo-icon">🌐</div><div class="tipo-t">Vendas via Representantes</div><div class="tipo-d">Gestão do funil por representantes e canais, deal registration, comissões e tabelas diferenciadas por parceiro e nível de certificação.</div><div class="tipo-pilares"><span class="tipo-pilar">CRM</span><span class="tipo-pilar wf">Workflow</span><span class="tipo-pilar cpq">CPQ</span></div></div>
+      <div class="tipo-card"><div class="tipo-icon">📅</div><div class="tipo-t">Vendas Sazonais (Safra / Coleção)</div><div class="tipo-d">Gestão de ciclos com listas de prospecção geradas automaticamente para cada período, baseadas no histórico de compras de safras anteriores.</div><div class="tipo-pilares"><span class="tipo-pilar">CRM</span><span class="tipo-pilar cpq">CPQ</span></div></div>
+    </div>
+  </div>
+</section><section style="background:var(--deep);padding:80px 40px" id="cpq">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-w">CPQ & Força de Vendas</div>
+      <h2>Proposta complexa gerada<br><em>em minutos, não horas</em></h2>
+      <p class="slead slead-w">O CPQ do Ploomes foi construído para a complexidade da indústria — vínculos de produtos, kits, tabelas por distribuidor e regras de desconto com aprovação integrada.</p>
+    </div>
+    <div class="cpq-wrap">
+      <div>
+        <div class="cpqi"><div class="cpqi-ic">🔗</div><div><div class="cpqi-t">Vínculos de produtos e kits</div><div class="cpqi-d">Configure dependências entre produtos — ao adicionar um item, o sistema sugere ou obriga componentes, acessórios e serviços vinculados automaticamente.</div></div></div>
+        <div class="cpqi"><div class="cpqi-ic">💰</div><div><div class="cpqi-t">Tabelas de preço por distribuidor</div><div class="cpqi-d">Cada distribuidor, canal ou cliente tem sua própria tabela. O representante seleciona o cliente e os preços corretos são aplicados automaticamente — sem consulta manual.</div></div></div>
+        <div class="cpqi"><div class="cpqi-ic">✅</div><div><div class="cpqi-t">Regras de desconto com alçadas</div><div class="cpqi-d">Desconto acima do limite trava a proposta até aprovação. Gerente aprova pelo celular em segundos — com histórico de quem aprovou, quando e qual a justificativa.</div></div></div>
+        <div class="cpqi"><div class="cpqi-ic">📱</div><div><div class="cpqi-t">Pedido gerado em campo pelo app</div><div class="cpqi-d">Representante acessa catálogo, preços e condições pelo celular. Fecha o pedido na frente do cliente — integrado ao ERP sem nenhuma redigitação.</div></div></div>
+        <div class="cpqi"><div class="cpqi-ic">📄</div><div><div class="cpqi-t">Contratos e aditivos automáticos</div><div class="cpqi-d">Templates preenchidos com dados do CRM. Geração automática de aditivos ao renovar ou ajustar condições de fornecimento — sem copiar e colar.</div></div></div>
+      </div>
+      <div class="cpq-demo">
+        <div class="cpq-demo-title">Exemplo · Pedido Industrial em Campo</div>
+        <div class="cpq-row"><span class="cpq-row-label">Produto principal</span><span class="cpq-row-val">Bomba Hidráulica BH-300</span><span class="cpq-row-tag">Qtd: 2</span></div>
+        <div class="cpq-row"><span class="cpq-row-label">Kit vinculado</span><span class="cpq-row-val">Kit Instalação + Vedação</span><span class="cpq-row-tag">Auto</span></div>
+        <div class="cpq-row"><span class="cpq-row-label">Serviço técnico</span><span class="cpq-row-val">Comissionamento in loco</span><span class="cpq-row-tag">Obrigatório</span></div>
+        <div class="cpq-row"><span class="cpq-row-label">Tabela aplicada</span><span class="cpq-row-val">Distribuidor SP — Nível Ouro</span><span class="cpq-row-tag">Automático</span></div>
+        <div class="cpq-row"><span class="cpq-row-label">Desconto solicitado</span><span class="cpq-row-val" style="color:var(--amber)">8% — aprovação pendente</span><span class="cpq-row-tag" style="background:rgba(245,166,35,.2);color:var(--amber)">Alçada</span></div>
+        <div class="cpq-total"><span class="cpq-total-label">Total do pedido</span><span class="cpq-total-val">R$ 48.750,00</span></div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:10px;text-align:center">Gerado pelo app mobile em campo · Integrado ao ERP em tempo real</div>
+      </div>
+    </div>
+  </div>
+</section><section style="background:var(--dp);padding:80px 40px" id="gestao-op">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-w">Gestão Operacional</div>
+      <h2>Além do CRM:<br><em>gestão completa da operação industrial</em></h2>
+      <p class="slead slead-w">O Ploomes é onde a operação acontece — não apenas onde as oportunidades são registradas.</p>
+    </div>
+    <div class="go-grid">
+      <div class="go-card"><span class="go-icon">📋</span><div class="go-t">Gestão de Contratos de Fornecimento</div><div class="go-d">Controle do ciclo de vida completo — da assinatura ao vencimento, com reajustes, aditivos e histórico de condições negociadas por cliente.</div><div class="go-benefits"><div class="go-benefit">Alertas automáticos de vencimento em múltiplos prazos</div><div class="go-benefit">Geração de aditivos com dados do CRM sem digitação</div><div class="go-benefit">Painel de contratos por status de risco e valor em aberto</div></div></div>
+      <div class="go-card"><span class="go-icon">🔧</span><div class="go-t">Gestão de Equipamentos Instalados</div><div class="go-d">Histórico de ativos por cliente — modelo, data de instalação, peças substituídas e atendimentos. Base para vendas proativas de manutenção e substituição.</div><div class="go-benefits"><div class="go-benefit">Alertas de manutenção preventiva por prazo configurável</div><div class="go-benefit">Identificação de equipamentos próximos ao ciclo de substituição</div><div class="go-benefit">Histórico de peças e serviços por ativo e por cliente</div></div></div>
+      <div class="go-card"><span class="go-icon">🛠</span><div class="go-t">Gestão de Assistência Técnica</div><div class="go-d">Chamados integrados ao CRM com orçamento de peças e mão de obra pelo CPQ, aprovação de serviços especiais e histórico por cliente e equipamento.</div><div class="go-benefits"><div class="go-benefit">Orçamento técnico gerado em campo pelo app mobile</div><div class="go-benefit">Aprovação de serviços fora de cobertura com auditoria</div><div class="go-benefit">Histórico de atendimentos vinculado ao cliente e ao ativo</div></div></div>
+      <div class="go-card"><span class="go-icon">🤝</span><div class="go-t">Gestão de Rede de Distribuidores</div><div class="go-d">Funil de captação e habilitação formal, tabelas de preço personalizadas e acompanhamento de desempenho por distribuidor e por território.</div><div class="go-benefits"><div class="go-benefit">Onboarding com checklist formal de habilitação</div><div class="go-benefit">Metas, margens e condições comerciais configuradas por canal</div><div class="go-benefit">Alertas de canais com queda de atividade ou volume</div></div></div>
+      <div class="go-card"><span class="go-icon">📊</span><div class="go-t">Gestão de Carteira Industrial</div><div class="go-d">Segmentação por volume, frequência e mix. Campos acumuladores calculam automaticamente o histórico de cada cliente para orientar a abordagem do representante.</div><div class="go-benefits"><div class="go-benefit">Alertas de clientes com queda de consumo não percebida</div><div class="go-benefit">Identificação de compradores pontuais com potencial de contrato</div><div class="go-benefit">Listas segmentadas para campanhas de novos produtos</div></div></div>
+      <div class="go-card"><span class="go-icon">🗺</span><div class="go-t">Força de Vendas em Campo</div><div class="go-d">Representantes com CRM completo no celular — check-in com GPS, catálogo, pedidos, histórico do cliente e KPIs de desempenho sem precisar voltar ao escritório.</div><div class="go-benefits"><div class="go-benefit">Check-in e check-out com geolocalização automática</div><div class="go-benefit">Pedido emitido em campo integrado ao ERP em tempo real</div><div class="go-benefit">Roteirização por prioridade de risco ou oportunidade de cliente</div></div></div>
+    </div>
+  </div>
+</section><section style="background:var(--pf);padding:80px 40px" id="gestao">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-dk">Gestão Comercial</div>
+      <h2 style="color:var(--dp)">Os pilares de uma operação<br><em style="color:var(--pm)">de alta performance</em></h2>
+      <p class="slead slead-dk">O Ploomes foi construído sobre esses conceitos. Entendê-los é a chave para extrair resultado real da plataforma na sua indústria.</p>
+    </div>
+    <div class="gestao-grid">
+      <div class="gc"><div class="gc-icon">🎯</div><div class="gc-t">Pipeline & Funil de Vendas</div><div class="gc-d">O pipeline é a fotografia da operação comercial em tempo real. Um funil bem estruturado revela gargalos, prediz faturamento e orienta o gestor sobre onde agir.</div><div class="gc-val">→ No Ploomes: funis múltiplos, campos por etapa, conversão em tempo real</div></div>
+      <div class="gc"><div class="gc-icon">📊</div><div class="gc-t">Cadência e Follow-up</div><div class="gc-d">Consistência no acompanhamento é o principal diferenciador entre representantes de alta e baixa performance. Cadências automáticas garantem que nenhuma oportunidade esfrie.</div><div class="gc-val">→ No Ploomes: e-mails automáticos, tasks, alertas de inatividade</div></div>
+      <div class="gc"><div class="gc-icon">🗂</div><div class="gc-t">Gestão de Carteira de Clientes</div><div class="gc-d">Carteira bem gerida é receita previsível. Segmentar por volume, frequência e potencial permite que o time aja proativamente — antes de perder a conta para o concorrente.</div><div class="gc-val">→ No Ploomes: campos acumuladores, IA de carteira, automações periódicas</div></div>
+      <div class="gc"><div class="gc-icon">🔢</div><div class="gc-t">Indicadores Comerciais (KPIs)</div><div class="gc-d">Taxa de conversão, ciclo médio de venda, positivação da carteira e share of wallet são os KPIs que guiam decisões de liderança na indústria.</div><div class="gc-val">→ No Ploomes: Analytics Pro com dashboards em tempo real</div></div>
+      <div class="gc"><div class="gc-icon">🔁</div><div class="gc-t">Ciclo de Vendas Industrial</div><div class="gc-d">Entender cada etapa — da prospecção de distribuidores ao fechamento de contratos de fornecimento — permite reduzir o tempo entre o contato e a receita gerada.</div><div class="gc-val">→ No Ploomes: relatórios de funil, lead score, processos paralelos</div></div>
+      <div class="gc"><div class="gc-icon">🤝</div><div class="gc-t">Handoff Vendas → Pós-Venda</div><div class="gc-d">A transição entre vendas e assistência técnica ou gestão de contratos é o principal ponto de perda de contexto. Um handoff no CRM garante continuidade sem atrito.</div><div class="gc-val">→ No Ploomes: processos paralelos, campos de contexto, histórico unificado</div></div>
+    </div>
+  </div>
+</section><section style="background:var(--dp);padding:80px 40px" id="funil">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-w">Funis Estratégicos</div>
+      <h2>Funis para cada<br><em>momento do negócio industrial</em></h2>
+      <p class="slead slead-w">Do reengajamento de leads perdidos à renovação de contratos de fornecimento — o Ploomes cobre cada processo com funis dedicados.</p>
+    </div>
+    <div class="funil-wrap">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--pl);margin-bottom:12px;letter-spacing:.5px;text-transform:uppercase">Funil de Retomada de Leads Perdidos</div>
+        <div class="fstage"><div class="fstage-num">1</div><div><div class="fstage-t">Leads inativos identificados automaticamente</div><div class="fstage-d">Automação busca leads sem interação há mais de 30 dias</div></div></div>
+        <div class="fstage-arrow">↓</div>
+        <div class="fstage"><div class="fstage-num">2</div><div><div class="fstage-t">Requalificação pelo representante</div><div class="fstage-d">Contexto completo disponível para abordagem assertiva</div></div></div>
+        <div class="fstage-arrow">↓</div>
+        <div class="fstage"><div class="fstage-num">3</div><div><div class="fstage-t">Reengajamento automático</div><div class="fstage-d">Sequência de e-mail e WhatsApp personalizada por segmento</div></div></div>
+        <div class="fstage-arrow">↓</div>
+        <div class="fstage"><div class="fstage-num">4</div><div><div class="fstage-t">Nova oportunidade gerada</div><div class="fstage-d">Resposta do lead → card criado no funil comercial ativo</div></div></div>
+        <div class="fstage-arrow">↓</div>
+        <div class="fstage"><div class="fstage-num">5</div><div><div class="fstage-t">Arquivamento com histórico preservado</div><div class="fstage-d">Sem resposta após tentativas → arquivado com contexto completo</div></div></div>
+      </div>
+      <div>
+        <div class="finfo-card"><div class="finfo-title"><span>🏆</span> Funil de Renovação de Contratos</div><div class="finfo-item">Contrato entra no funil automaticamente 90 dias antes do vencimento</div><div class="finfo-item">Régua programada em -60, -30 e -7 dias com comunicações automáticas</div><div class="finfo-item">Score de risco calculado pela IA com base em uso, inadimplência e histórico</div><div class="finfo-item">Escalamento automático para o gestor quando o risco de perda é alto</div></div>
+        <div class="finfo-card"><div class="finfo-title"><span>⚡</span> Funil de Upsell de Produtos</div><div class="finfo-item">Gatilho ao atingir critério de volume ou mix incompleto detectado pelo sistema</div><div class="finfo-item">Representante recebe alerta com produto sugerido baseado no perfil do cliente</div><div class="finfo-item">Proposta gerada automaticamente com histórico de compras pré-carregado</div><div class="finfo-item">Acompanhamento de aceitação vinculado ao funil comercial principal</div></div>
+        <div class="finfo-card"><div class="finfo-title"><span>🔁</span> Funil de Retorno de Ex-Clientes</div><div class="finfo-item">Ex-distribuidores ou clientes entram em régua de reativação automática</div><div class="finfo-item">Comunicação personalizada com base no motivo de saída registrado no CRM</div><div class="finfo-item">Representante notificado quando o ex-cliente demonstra interesse novamente</div><div class="finfo-item">Histórico comercial completo disponível para a nova abordagem</div></div>
+      </div>
+    </div>
+  </div>
+</section><section style="background:var(--deep);padding:80px 40px" id="canais">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-w">Canais de Comunicação</div>
+      <h2>Todos os canais.<br><em>Um único histórico.</em></h2>
+      <p class="slead slead-w">O cliente não vê canais — ele vê a empresa. O Ploomes centraliza WhatsApp, e-mail e telefone em um único registro vinculado ao CRM.</p>
+    </div>
+    <div class="canais-grid">
+      <div class="canal wp"><span class="canal-icon">💬</span><div class="canal-name">WhatsApp</div><div class="canal-desc">Integração com WhatsApp Business e pessoal — conversas dos representantes registradas automaticamente no CRM.</div><div class="canal-items"><div class="canal-item">Histórico de mensagens vinculado ao card do cliente</div><div class="canal-item">Envio de templates e automações via WhatsApp</div><div class="canal-item">Atendimento multiagente centralizado</div><div class="canal-item">Registro de WhatsApp pessoal do representante</div></div></div>
+      <div class="canal em"><span class="canal-icon">📧</span><div class="canal-name">E-mail</div><div class="canal-desc">Gmail e Outlook sincronizados com o CRM — cada e-mail trocado com cliente ou distribuidor registrado no histórico.</div><div class="canal-items"><div class="canal-item">Sincronização bidirecional com Gmail e Outlook</div><div class="canal-item">E-mails automáticos por gatilho do funil</div><div class="canal-item">Templates personalizados por segmento de cliente</div><div class="canal-item">Google Calendar integrado às atividades do CRM</div></div></div>
+      <div class="canal tel"><span class="canal-icon">📞</span><div class="canal-name">Telefone</div><div class="canal-desc">Registre chamadas e crie tasks de follow-up direto no CRM — com transcrição via IA das ligações importantes.</div><div class="canal-items"><div class="canal-item">Registro automático de chamadas realizadas</div><div class="canal-item">Transcrição de ligações via IA</div><div class="canal-item">Click-to-call integrado ao card do cliente</div><div class="canal-item">Histórico com duração, resultado e próximos passos</div></div></div>
+    </div>
+  </div>
+</section><section style="background:var(--dp);padding:80px 40px" id="analytics">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-w">Analytics Pro</div>
+      <h2>Relatórios que orientam<br><em>decisões industriais</em></h2>
+      <p class="slead slead-w">Dados sem contexto são ruído. O Analytics Pro transforma os dados do CRM em inteligência comercial — com exemplos reais do setor industrial.</p>
+    </div>
+    <div class="analytics-grid">
+      <div class="acard"><span class="acard-icon">📉</span><div class="acard-t">Funil de Conversão por Etapa</div><div class="acard-d">Visualize onde as propostas e negociações travam no processo e qual etapa concentra a maior perda.</div><div class="acard-case"><strong>Case industrial</strong>Distribuidora identificou que 65% das propostas travavam na aprovação interna. Ajustou o fluxo de alçadas e reduziu o ciclo em 18 dias.</div></div>
+      <div class="acard"><span class="acard-icon">💰</span><div class="acard-t">Forecast de Receita</div><div class="acard-d">Projeção de faturamento baseada no pipeline ativo e no histórico de conversão por etapa e por representante.</div><div class="acard-case"><strong>Case industrial</strong>Diretor comercial passou a apresentar forecast para o board com 85% de acurácia — eliminando planilhas manuais de pipeline.</div></div>
+      <div class="acard"><span class="acard-icon">🤝</span><div class="acard-t">Desempenho por Distribuidor</div><div class="acard-d">Volume, mix, frequência e sell-out por canal. Identifique quais distribuidores crescem e quais precisam de ação imediata.</div><div class="acard-case"><strong>Case industrial</strong>Gestor de canais encontrou 3 distribuidores com queda de 40% no mix e reativou 2 com campanha segmentada.</div></div>
+      <div class="acard"><span class="acard-icon">📦</span><div class="acard-t">Mix e Positivação de Carteira</div><div class="acard-d">O que cada cliente compra e o que nunca comprou. Identifique oportunidades de expansão de mix na base atual.</div><div class="acard-case"><strong>Case industrial</strong>Vendedor identificou que 40% da carteira nunca havia comprado a linha de consumíveis — gerou 28% de receita incremental.</div></div>
+      <div class="acard"><span class="acard-icon">👥</span><div class="acard-t">Performance por Representante</div><div class="acard-d">Taxa de conversão, ticket médio, visitas realizadas e velocidade de ciclo por membro do time comercial.</div><div class="acard-case"><strong>Case industrial</strong>Gestor identificou que o melhor representante fazia 40% mais follow-ups. Replicou a cadência e elevou a média do time.</div></div>
+      <div class="acard"><span class="acard-icon">🔋</span><div class="acard-t">Saúde de Contratos e Renovações</div><div class="acard-d">Painel por status de risco — vencimentos próximos, inadimplência e histórico de renovações por cliente.</div><div class="acard-case"><strong>Case industrial</strong>Gestor de contratos identificou 8 clientes em risco com 60 dias de antecedência — reteve 6 antes do vencimento.</div></div>
+    </div>
+    <div class="ademo">
+      <div class="ademo-title">Dashboard Executivo · Visão em Tempo Real</div>
+      <div class="ademo-kpis">
+        <div class="akpi"><div class="akpi-n">R$3,4M</div><div class="akpi-l">Pipeline ativo</div></div>
+        <div class="akpi"><div class="akpi-n">38%</div><div class="akpi-l">Taxa de conversão</div></div>
+        <div class="akpi"><div class="akpi-n">32d</div><div class="akpi-l">Ciclo médio</div></div>
+        <div class="akpi"><div class="akpi-n">R$22k</div><div class="akpi-l">Ticket médio</div></div>
+      </div>
+      <div class="abar-row"><div class="abar-label"><span>Prospecção → Qualificado</span><span>71%</span></div><div class="abar-track"><div class="abar-fill" style="width:71%"></div></div></div>
+      <div class="abar-row"><div class="abar-label"><span>Qualificado → Proposta</span><span>54%</span></div><div class="abar-track"><div class="abar-fill" style="width:54%"></div></div></div>
+      <div class="abar-row"><div class="abar-label"><span>Proposta → Fechado</span><span>38%</span></div><div class="abar-track"><div class="abar-fill" style="width:38%"></div></div></div>
+    </div>
+  </div>
+</section><section style="background:var(--deep);padding:80px 40px" id="automacoes">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-w">Automações</div>
+      <h2>A plataforma que trabalha<br><em>enquanto o representante visita o cliente</em></h2>
+      <p class="slead slead-w">Configure uma vez, colha resultado continuamente. Automações eliminam retrabalho e garantem que nenhuma etapa do processo industrial seja pulada.</p>
+    </div>
+    <div class="auto-cats">
+      <div class="autocat">
+        <div class="autocat-header"><span class="autocat-icon">🏆</span><div><div class="autocat-title">Ganhar Negociação</div><div class="autocat-sub">Ações automáticas ao fechar uma venda</div></div></div>
+        <div class="ai2"><div class="ai2-dot green"></div><div class="ai2-text"><strong>Card de pós-venda criado automaticamente</strong>Instalação, assistência ou onboarding com responsável já atribuído e contexto da venda carregado</div></div>
+        <div class="ai2"><div class="ai2-dot green"></div><div class="ai2-text"><strong>Contrato de fornecimento gerado e enviado</strong>Template preenchido com dados do pedido — sem nenhuma digitação manual</div></div>
+        <div class="ai2"><div class="ai2-dot green"></div><div class="ai2-text"><strong>Pedido integrado ao ERP automaticamente</strong>Sem redigitação ou planilha paralela do backoffice da empresa</div></div>
+        <div class="ai2"><div class="ai2-dot green"></div><div class="ai2-text"><strong>E-mail de confirmação enviado ao cliente</strong>Com resumo do pedido, prazo de entrega e próximos passos</div></div>
+      </div>
+      <div class="autocat">
+        <div class="autocat-header"><span class="autocat-icon">❌</span><div><div class="autocat-title">Perder Negociação</div><div class="autocat-sub">Ações ao perder uma oportunidade</div></div></div>
+        <div class="ai2"><div class="ai2-dot amber"></div><div class="ai2-text"><strong>Lead entra no funil de retomada automaticamente</strong>Com motivo de perda registrado e prazo de recontato programado</div></div>
+        <div class="ai2"><div class="ai2-dot amber"></div><div class="ai2-text"><strong>Gestor notificado com motivo da perda</strong>Visibilidade de perdas por categoria e por concorrente em tempo real</div></div>
+        <div class="ai2"><div class="ai2-dot amber"></div><div class="ai2-text"><strong>Sequência de nutrição técnica ativada</strong>E-mails espaçados com casos de uso, fichas técnicas e diferenciais relevantes</div></div>
+        <div class="ai2"><div class="ai2-dot amber"></div><div class="ai2-text"><strong>Alerta para retomada em 60 dias</strong>Representante lembrado de tentar novamente após prazo configurado</div></div>
+      </div>
+      <div class="autocat">
+        <div class="autocat-header"><span class="autocat-icon">✅</span><div><div class="autocat-title">Finalizar Atividade</div><div class="autocat-sub">Ações ao concluir uma tarefa ou visita</div></div></div>
+        <div class="ai2"><div class="ai2-dot purple"></div><div class="ai2-text"><strong>Próxima atividade da cadência criada automaticamente</strong>Representante não precisa lembrar o próximo passo — está lá</div></div>
+        <div class="ai2"><div class="ai2-dot purple"></div><div class="ai2-text"><strong>Card avança de etapa se campos obrigatórios estão ok</strong>Validação automática antes de permitir o avanço no funil</div></div>
+        <div class="ai2"><div class="ai2-dot purple"></div><div class="ai2-text"><strong>Gestor avisado se atividade estava fora do SLA</strong>Visibilidade de comprometimento e performance do time de representantes</div></div>
+        <div class="ai2"><div class="ai2-dot purple"></div><div class="ai2-text"><strong>Cliente notificado quando aplicável</strong>Confirmação de visita realizada, entrega ou serviço técnico concluído</div></div>
+      </div>
+    </div>
+    <div class="catalogo-box">
+      <div class="cat-title">📚 Catálogo de Automações — Modelos prontos para a indústria</div>
+      <div class="cat-tags">
+        <span class="cat-tag">Alerta de inatividade de compra</span>
+        <span class="cat-tag">Régua de renovação de contrato</span>
+        <span class="cat-tag">Boas-vindas pós-fechamento</span>
+        <span class="cat-tag">Follow-up pós-visita técnica</span>
+        <span class="cat-tag">Requalificação de lead frio</span>
+        <span class="cat-tag">Manutenção preventiva vencida</span>
+        <span class="cat-tag">Escalamento por SLA estourado</span>
+        <span class="cat-tag">Recálculo de campos acumuladores</span>
+        <span class="cat-tag">Relatório semanal do gestor</span>
+        <span class="cat-tag">Redistribuição de carteira</span>
+        <span class="cat-tag">Aprovação de desconto</span>
+        <span class="cat-tag">Abertura de chamado técnico</span>
+        <span class="cat-tag">Proposta expirada (7 dias)</span>
+        <span class="cat-tag">Substituição de equipamento</span>
+        <span class="cat-tag">Upsell por volume atingido</span>
+        <span class="cat-tag">Handoff vendas → pós-venda</span>
+        <span class="cat-tag">Alerta de canal inativo</span>
+        <span class="cat-tag">NPS pós-entrega ou instalação</span>
+      </div>
+    </div>
+  </div>
+</section><section style="background:var(--dp);padding:80px 40px" id="ia">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-w">Inteligência Artificial</div>
+      <h2>IA integrada ao CRM,<br><em>não colada por fora</em></h2>
+      <p class="slead slead-w">A IA do Ploomes acessa diretamente os dados da sua operação — sem exportar planilhas, sem contexto perdido, sem ferramenta adicional.</p>
+    </div>
+    <div class="ia-wrap">
+      <div class="ia-items">
+        <div class="iai"><div class="iai-ic">🤖</div><div><div class="iai-t">Assistente de IA com MCP do Ploomes</div><div class="iai-d">O assistente usa o protocolo MCP para acessar clientes, distribuidores, contratos e métricas em tempo real. Pergunte em linguagem natural e receba respostas com os dados reais da sua conta.</div></div></div>
+        <div class="iai"><div class="iai-ic">📉</div><div><div class="iai-t">Gestão Preditiva de Carteira</div><div class="iai-d">Score de saúde por cliente atualizado em tempo real. A IA detecta padrões de queda de volume e frequência antes que o distribuidor ou cliente manifeste qualquer insatisfação.</div></div></div>
+        <div class="iai"><div class="iai-ic">🎙</div><div><div class="iai-t">Transcrição de Visitas Técnicas</div><div class="iai-d">Visitas em campo, reuniões de negociação e calls técnicos transcritos pela IA e vinculados ao card do cliente — com compromissos e pontos de ação identificados automaticamente.</div></div></div>
+        <div class="iai"><div class="iai-ic">✍</div><div><div class="iai-t">Redação assistida por IA</div><div class="iai-d">Sugestão de e-mails, propostas e follow-ups com base no histórico do cliente, tipo de venda e estágio do funil — mantendo o tom técnico e comercial adequado para a indústria.</div></div></div>
+      </div>
+      <div class="ia-chat">
+        <div class="ia-chat-header"><div class="ia-dot-live"></div><div class="ia-chat-title">Assistente IA · MCP Ploomes</div></div>
+        <div class="msg user">Quais distribuidores estão com queda de volume este trimestre?</div>
+        <div class="msg ai"><strong>Análise da rede de canais</strong>Identifiquei 3 distribuidores com queda significativa nos últimos 90 dias:<br><br>🔴 <b>Dist. Norte SP</b> — queda de 58%, sem pedido há 34 dias<br>🔴 <b>Dist. ABC</b> — parou de comprar linha B, mix incompleto<br>🟡 <b>Dist. Sul MG</b> — volume estável mas abaixo da meta do canal<br><br>Desejo criar tarefas para os representantes responsáveis?</div>
+        <div class="msg user">Sim. E gere um e-mail de reativação para o Dist. Norte SP.</div>
+        <div class="msg ai"><strong>Concluído</strong>✅ 3 tarefas criadas com prazo de 5 dias úteis<br>✅ Rascunho salvo no card do Dist. Norte SP com histórico de compras dos últimos 12 meses e produtos sugeridos para a nova abordagem.</div>
+      </div>
+    </div>
+  </div>
+</section><section style="background:var(--deep);padding:80px 40px" id="seguranca">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-w">Segurança & Conformidade</div>
+      <h2>Dados da operação industrial<br><em>protegidos com padrão enterprise</em></h2>
+      <p class="slead slead-w">Tabelas de preço, contratos e histórico de distribuidores são ativos estratégicos. O Ploomes protege cada camada com padrão enterprise.</p>
+    </div>
+    <div class="seg-cards">
+      <div class="sgc"><span class="sgc-icon">🔐</span><div class="sgc-t">Controle de acesso granular</div><div class="sgc-d">Representante vê só sua carteira. Gestor vê seu time. Diretor vê tudo. Permissões por perfil com logs completos.</div><div class="sgc-b">Ativo</div></div>
+      <div class="sgc"><span class="sgc-icon">🛡</span><div class="sgc-t">Proteção contra invasões</div><div class="sgc-d">Detecção de anomalias, bloqueio de acessos suspeitos e MFA para todos os usuários da plataforma.</div><div class="sgc-b">Certificado</div></div>
+      <div class="sgc"><span class="sgc-icon">🔒</span><div class="sgc-t">Criptografia AES-256</div><div class="sgc-d">Dados em trânsito e em repouso criptografados. Tabelas de preço e contratos protegidos em todas as camadas.</div><div class="sgc-b">AES-256</div></div>
+      <div class="sgc"><span class="sgc-icon">📋</span><div class="sgc-t">Auditoria completa</div><div class="sgc-d">Histórico imutável de quem alterou condição comercial, preço ou contrato — e quando. Essencial para compliance.</div><div class="sgc-b">LGPD Ready</div></div>
+      <div class="sgc"><span class="sgc-icon">☁</span><div class="sgc-t">Backup automático</div><div class="sgc-d">Cópias redundantes em múltiplas regiões — histórico comercial e de contratos preservado sem risco de perda.</div><div class="sgc-b">99.9% uptime</div></div>
+      <div class="sgc"><span class="sgc-icon">👁</span><div class="sgc-t">Monitoramento 24/7</div><div class="sgc-d">Infraestrutura monitorada continuamente com alertas automáticos e SLA de resposta a incidentes.</div><div class="sgc-b">Monitorado</div></div>
+    </div>
+  </div>
+</section><section style="background:var(--pf);padding:80px 40px" id="dev">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:48px">
+      <div class="stag stag-dk">Campo Dev</div>
+      <h2 style="color:var(--dp)">Personalize o CRM<br><em style="color:var(--pm)">para a sua operação industrial</em></h2>
+      <p class="slead slead-dk">O Campo Dev cria botões, cálculos, indicadores visuais e lógicas de negócio específicas da indústria diretamente no Ploomes — sem desenvolvimento externo.</p>
+    </div>
+    <div class="dev-wrap">
+      <div>
+        <div class="dex"><div class="dex-header"><div class="dex-dot"></div><div class="dex-title">Exemplo 1 · Botão — Abrir Pedido no ERP</div></div><div class="dex-body"><div class="dex-desc">Botão que abre o pedido correspondente no ERP externo diretamente do card do CRM — sem sair da plataforma.</div><div class="code-block"><span class="cm">// Abre o pedido no ERP ao clicar</span>
+<span class="kw">if</span> (card.erp_order_id) {
+  <span class="kw">return</span> {
+    label: <span class="str">"📦 Abrir no ERP"</span>,
+    url: <span class="str">`https://erp.empresa.com/pedido/</span>
+         <span class="str">${card.erp_order_id}`</span>,
+    style: <span class="str">"primary"</span>
+  };
+}</div></div></div>
+        <div class="dex"><div class="dex-header"><div class="dex-dot"></div><div class="dex-title">Exemplo 2 · Semáforo de Saúde do Distribuidor</div></div><div class="dex-body"><div class="dex-desc">Calcula automaticamente a saúde do distribuidor com base em volume, frequência e mix — exibindo indicador visual no card.</div><div class="code-block"><span class="cm">// Score de saúde do canal</span>
+<span class="kw">let</span> score = 0;
+<span class="kw">if</span> (card.monthly_vol > 50000) score += 40;
+<span class="kw">if</span> (card.days_since_order < 15) score += 35;
+<span class="kw">if</span> (card.active_products > 5) score += 25;
+<span class="kw">return</span> {
+  value: score + <span class="str">"%"</span>,
+  icon: score > 70 ? <span class="str">"🟢"</span>
+      : score > 40 ? <span class="str">"🟡"</span> : <span class="str">"🔴"</span>
+};</div></div></div>
+        <div class="dex"><div class="dex-header"><div class="dex-dot"></div><div class="dex-title">Exemplo 3 · Alerta de Contrato Vencendo</div></div><div class="dex-body"><div class="dex-desc">Exibe aviso visual no card quando o contrato de fornecimento está dentro do prazo de renovação configurado.</div><div class="code-block"><span class="cm">// Alerta de vencimento</span>
+<span class="kw">const</span> dias = Math.floor(
+  (new Date(card.contract_end)
+   - new Date()) / 86400000
+);
+<span class="kw">if</span> (dias <= 60) {
+  <span class="kw">return</span> {
+    label: <span class="str">`⚠️ Vence em ${dias} dias`</span>,
+    color: dias <= 30 ? <span class="str">"red"</span>:<span class="str">"orange"</span>
+  };
+}</div></div></div>
+      </div>
+      <div>
+        <div class="devinfo"><div class="devinfo-t"><span>💡</span> O que é possível criar</div><div class="devinfo-d">Botões para ERP, semáforos de saúde de distribuidor, alertas de contrato vencendo, Lead Score por perfil industrial, indicadores de share of wallet e muito mais — tudo dentro do Ploomes.</div></div>
+        <div class="devinfo"><div class="devinfo-t"><span>🚀</span> Para quem é</div><div class="devinfo-d">Qualquer gestor ou analista com conhecimento básico de JavaScript. A Amanda pode ajudar a construir os primeiros campos junto com você e o time de suporte.</div></div>
+        <div class="devinfo"><div class="devinfo-t"><span>📚</span> Como começar</div><div class="devinfo-d">Acesse Configurações → Campos → Campo Dev. A central de ajuda tem exemplos prontos para os casos de uso mais comuns na operação industrial.</div></div>
+        <div class="devinfo"><div class="devinfo-t"><span>🔧</span> Suporte disponível</div><div class="devinfo-d">Dúvidas na implementação? O time de suporte técnico tem exemplos prontos para os cenários mais comuns — abra um chamado ou acione a Amanda diretamente.</div></div>
+      </div>
+    </div>
+  </div>
+</section><section style="background:var(--deep);padding:80px 40px" id="integracoes">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:44px">
+      <div class="stag stag-w">Integrações</div>
+      <h2>Conectado com<br><em>o ecossistema da indústria</em></h2>
+      <p class="slead slead-w">O Ploomes não substitui o que já funciona — integra. ERP, ferramentas de crédito, sistemas de logística e comunicação em uma plataforma.</p>
+    </div>
+    <div class="integ-highlight">
+      <div class="ihl"><div class="ihl-ic">📧</div><div><div class="ihl-t">E-mail integrado ao CRM</div><div class="ihl-d">Gmail e Outlook sincronizados — cada e-mail com cliente ou distribuidor registrado automaticamente no histórico do CRM.</div></div></div>
+      <div class="ihl"><div class="ihl-ic">📅</div><div><div class="ihl-t">Google Calendar</div><div class="ihl-d">Visitas técnicas e reuniões criadas no CRM aparecem na agenda. Eventos do Calendar vinculados ao card do cliente.</div></div></div>
+    </div>
+    <div class="idiv">Operações & ERP</div>
+    <div class="igrid">
+      <div class="icard"><span class="icard-ic">🧾</span><div class="icard-n">Faturamento / NF-e</div><div class="icard-t">ERP integrado</div></div>
+      <div class="icard"><span class="icard-ic">🚚</span><div class="icard-n">Logística</div><div class="icard-t">TMS / Transportadoras</div></div>
+      <div class="icard"><span class="icard-ic">💰</span><div class="icard-n">Financeiro</div><div class="icard-t">Cobrança / ERP</div></div>
+      <div class="icard"><span class="icard-ic">📋</span><div class="icard-n">Pedidos de Venda</div><div class="icard-t">ERP / e-commerce B2B</div></div>
+    </div>
+    <div class="idiv">Crédito, Suporte & Campo</div>
+    <div class="igrid">
+      <div class="icard"><span class="icard-ic">🔍</span><div class="icard-n">Serasa</div><div class="icard-t">Análise de crédito</div></div>
+      <div class="icard"><span class="icard-ic">🎫</span><div class="icard-n">Chamados Técnicos</div><div class="icard-t">Helpdesk / ITSM</div></div>
+      <div class="icard"><span class="icard-ic">📱</span><div class="icard-n">App Mobile</div><div class="icard-t">iOS / Android</div></div>
+      <div class="icard"><span class="icard-ic">⚙️</span><div class="icard-n">API Aberta</div><div class="icard-t">Qualquer sistema</div></div>
+    </div>
+  </div>
+</section><section style="background:var(--dp);padding:80px 40px" id="suporte">
+  <div class="wrap fi">
+    <div class="tc" style="margin-bottom:44px">
+      <div class="stag stag-w">Suporte Técnico</div>
+      <h2>Quando precisar de ajuda,<br><em>estamos aqui</em></h2>
+      <p class="slead slead-w">Dúvidas técnicas são normais — o importante é saber onde buscar a resposta no canal certo e no menor tempo.</p>
+    </div>
+    <div class="suporte-grid">
+      <div class="sup"><span class="sup-icon">💬</span><div class="sup-t">Chat dentro do Ploomes</div><div class="sup-d">Acesse o chat de suporte diretamente na plataforma para dúvidas rápidas de configuração e uso diário.</div><div class="sup-sla">Resposta em até 2h</div></div>
+      <div class="sup"><span class="sup-icon">🎫</span><div class="sup-t">Portal de Chamados</div><div class="sup-d">Tickets técnicos para integrações, Campo Dev e configurações avançadas — com SLA garantido por contrato.</div><div class="sup-sla">SLA por contrato</div></div>
+      <div class="sup"><span class="sup-icon">📚</span><div class="sup-t">Central de Ajuda</div><div class="sup-d">Documentação completa com artigos, vídeos e tutoriais para todas as funcionalidades — disponível 24/7.</div><div class="sup-sla">Disponível 24/7</div></div>
+      <div class="sup"><span class="sup-icon">🤝</span><div class="sup-t">Gerente de Contas Amanda</div><div class="sup-d">Amanda é o elo entre você e o time técnico. Para dúvidas estratégicas ou priorização de suporte, acione pelo WhatsApp.</div><div class="sup-sla">Contato direto</div></div>
+      <div class="sup"><span class="sup-icon">🎓</span><div class="sup-t">Webinars e treinamentos</div><div class="sup-d">Sessões ao vivo para capacitar o time nas funcionalidades mais relevantes para a operação industrial.</div><div class="sup-sla">Sob agendamento</div></div>
+      <div class="sup"><span class="sup-icon">🛠</span><div class="sup-t">Suporte a integrações</div><div class="sup-d">Para API, webhooks e integrações com ERP, o time técnico do Ploomes apoia com diagnóstico e solução completa.</div><div class="sup-sla">Time especializado</div></div>
+    </div>
+    <div class="suporte-tip"><div style="font-size:22px;flex-shrink:0">💡</div><div><div style="font-size:13px;font-weight:700;margin-bottom:4px">Como abrir um chamado eficiente</div><div style="font-size:12px;color:rgba(255,255,255,.72);line-height:1.7">Inclua: o que você quer fazer, o que está acontecendo, prints ou vídeo da tela e o nome do campo ou automação envolvida. Isso reduz o tempo de resolução em até 60%.</div></div></div>
+  </div>
+</section><section class="diag-sec" id="diagnostico">
+  <div class="diag-container fi">
+    <div class="tc" style="margin-bottom:40px">
+      <div class="stag stag-w">Diagnóstico de Maturidade</div>
+      <h2>Quanto do Ploomes<br><em>você está usando?</em></h2>
+      <p class="slead slead-w">Responda o checklist e descubra seu índice de aproveitamento — e quais recursos podem gerar mais resultado para a sua operação industrial.</p>
+    </div>
+    <div class="diag-progress">
+      <div class="diag-progress-header"><div class="diag-progress-title">Índice de aproveitamento do Ploomes</div><div class="diag-score-display" id="scoreDisplay">0%</div></div>
+      <div class="diag-bar"><div class="diag-bar-fill" id="diagBar"></div></div>
+      <div class="diag-score-label" id="scoreLabel">Marque os itens que já utiliza para calcular seu score</div>
+    </div>
+    <div class="diag-categories">
+      <div class="diag-cat open" id="cat-crm">
+        <div class="diag-cat-header" onclick="toggleCat('cat-crm')"><div class="diag-cat-title"><span>🗂</span> CRM & Pipeline</div><div style="display:flex;align-items:center;gap:8px"><div class="diag-cat-score" id="score-cat-crm">0/6</div><div class="diag-cat-arrow">›</div></div></div>
+        <div class="diag-cat-body"><div class="diag-items">
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-crm')"></div><div class="diag-item-text"><div class="diag-item-title">Funil configurado com as etapas reais do processo comercial</div><div class="diag-item-desc">As etapas refletem como a empresa de fato vende — não um funil genérico</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-crm')"></div><div class="diag-item-text"><div class="diag-item-title">Lead Score ativo com critérios do negócio industrial</div><div class="diag-item-desc">Pontuação automática que prioriza melhores leads e distribuidores</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-crm')"></div><div class="diag-item-text"><div class="diag-item-title">Carteiramento automático de clientes e distribuidores</div><div class="diag-item-desc">Distribuição sem intervenção manual por região ou segmento</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-crm')"></div><div class="diag-item-text"><div class="diag-item-title">CPQ com catálogo, kits, vínculos e tabelas por distribuidor</div><div class="diag-item-desc">Propostas e pedidos gerados sem erros de preço dentro do Ploomes</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-crm')"></div><div class="diag-item-text"><div class="diag-item-title">Funil de retomada de leads e distribuidores inativos</div><div class="diag-item-desc">Processo automático para reativar leads e canais que pararam de comprar</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-crm')"></div><div class="diag-item-text"><div class="diag-item-title">Gestão de contratos de fornecimento com alertas de vencimento</div><div class="diag-item-desc">Controle de renovações com régua automática configurada</div></div></div>
+        </div></div>
+      </div>
+      <div class="diag-cat" id="cat-auto">
+        <div class="diag-cat-header" onclick="toggleCat('cat-auto')"><div class="diag-cat-title"><span>⚡</span> Automações & Processos</div><div style="display:flex;align-items:center;gap:8px"><div class="diag-cat-score" id="score-cat-auto">0/5</div><div class="diag-cat-arrow">›</div></div></div>
+        <div class="diag-cat-body"><div class="diag-items">
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-auto')"></div><div class="diag-item-text"><div class="diag-item-title">Automações de ganhar e perder negociação configuradas</div><div class="diag-item-desc">Ações automáticas ao fechar ou perder uma oportunidade comercial</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-auto')"></div><div class="diag-item-text"><div class="diag-item-title">Automações periódicas de carteira ativas</div><div class="diag-item-desc">Alertas de inatividade e réguas de renovação rodando automaticamente</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-auto')"></div><div class="diag-item-text"><div class="diag-item-title">Processos paralelos entre vendas e pós-venda</div><div class="diag-item-desc">Handoff automático ao fechar — assistência técnica ou instalação aberta sem ação manual</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-auto')"></div><div class="diag-item-text"><div class="diag-item-title">Fluxo de aprovação de descontos ativo</div><div class="diag-item-desc">Alçadas com notificação e auditoria — sem aprovação informal por WhatsApp</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-auto')"></div><div class="diag-item-text"><div class="diag-item-title">Campos acumuladores de histórico de compras</div><div class="diag-item-desc">Volume, frequência e mix calculados automaticamente por cliente e distribuidor</div></div></div>
+        </div></div>
+      </div>
+      <div class="diag-cat" id="cat-canais">
+        <div class="diag-cat-header" onclick="toggleCat('cat-canais')"><div class="diag-cat-title"><span>💬</span> Canais & Comunicação</div><div style="display:flex;align-items:center;gap:8px"><div class="diag-cat-score" id="score-cat-canais">0/4</div><div class="diag-cat-arrow">›</div></div></div>
+        <div class="diag-cat-body"><div class="diag-items">
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-canais')"></div><div class="diag-item-text"><div class="diag-item-title">E-mail integrado ao CRM (Gmail ou Outlook)</div><div class="diag-item-desc">Histórico de e-mails visível no card do cliente ou distribuidor</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-canais')"></div><div class="diag-item-text"><div class="diag-item-title">WhatsApp integrado ao Ploomes</div><div class="diag-item-desc">Conversas dos representantes registradas automaticamente no CRM</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-canais')"></div><div class="diag-item-text"><div class="diag-item-title">Google Calendar integrado às atividades</div><div class="diag-item-desc">Visitas e reuniões criadas no CRM aparecem na agenda do representante</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-canais')"></div><div class="diag-item-text"><div class="diag-item-title">App mobile ativo para representantes em campo</div><div class="diag-item-desc">Check-in, pedidos e catálogo acessados pelo celular sem voltar ao escritório</div></div></div>
+        </div></div>
+      </div>
+      <div class="diag-cat" id="cat-dados">
+        <div class="diag-cat-header" onclick="toggleCat('cat-dados')"><div class="diag-cat-title"><span>📊</span> Analytics & Relatórios</div><div style="display:flex;align-items:center;gap:8px"><div class="diag-cat-score" id="score-cat-dados">0/4</div><div class="diag-cat-arrow">›</div></div></div>
+        <div class="diag-cat-body"><div class="diag-items">
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-dados')"></div><div class="diag-item-text"><div class="diag-item-title">Analytics Pro com relatórios de funil e conversão</div><div class="diag-item-desc">Gestão baseada em dados — não em feeling ou planilha manual</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-dados')"></div><div class="diag-item-text"><div class="diag-item-title">Dashboard personalizado por perfil de usuário</div><div class="diag-item-desc">Representante, gestor e diretor veem o que é relevante para cada papel</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-dados')"></div><div class="diag-item-text"><div class="diag-item-title">Relatório de desempenho por distribuidor</div><div class="diag-item-desc">Volume, mix e sell-out acompanhados em tempo real por canal</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-dados')"></div><div class="diag-item-text"><div class="diag-item-title">Relatórios automáticos enviados ao gestor</div><div class="diag-item-desc">Relatório semanal ou mensal gerado e enviado sem ação manual</div></div></div>
+        </div></div>
+      </div>
+      <div class="diag-cat" id="cat-ia">
+        <div class="diag-cat-header" onclick="toggleCat('cat-ia')"><div class="diag-cat-title"><span>🤖</span> IA & Recursos Avançados</div><div style="display:flex;align-items:center;gap:8px"><div class="diag-cat-score" id="score-cat-ia">0/4</div><div class="diag-cat-arrow">›</div></div></div>
+        <div class="diag-cat-body"><div class="diag-items">
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-ia')"></div><div class="diag-item-text"><div class="diag-item-title">Assistente de IA com MCP ativado</div><div class="diag-item-desc">Consultas ao CRM em linguagem natural via IA integrada</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-ia')"></div><div class="diag-item-text"><div class="diag-item-title">Transcrição de visitas técnicas e reuniões</div><div class="diag-item-desc">Atas automáticas vinculadas ao card do cliente após cada visita</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-ia')"></div><div class="diag-item-text"><div class="diag-item-title">Campo Dev com pelo menos 1 campo ativo</div><div class="diag-item-desc">Lógicas personalizadas para a operação industrial dentro do Ploomes</div></div></div>
+          <div class="diag-item"><div class="diag-check" onclick="toggleCheck(this,'cat-ia')"></div><div class="diag-item-text"><div class="diag-item-title">Gestão de equipamentos instalados por cliente</div><div class="diag-item-desc">Histórico de ativos com alertas de manutenção e ciclo de substituição</div></div></div>
+        </div></div>
+      </div>
+    </div>
+    <div class="diag-result" id="diagResult">
+      <div class="diag-result-score" id="diagResultScore">0%</div>
+      <div class="diag-result-label" id="diagResultLabel"></div>
+      <div class="diag-result-msg" id="diagResultMsg"></div>
+      <a href="https://wa.me/5511934012924" target="_blank" class="diag-result-cta"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Enviar resultado para a Amanda</a>
+    </div>
+  </div>
+</section><section class="csm-sec" id="csm">
+  <div class="csm-inner">
+    <div class="csm-tag2">Próximo passo</div>
+    <div class="csm-h">Vamos ativar o que ainda<br><em>não está gerando resultado?</em></div>
+    <p class="csm-p">Uma conversa de 30 minutos com a Amanda é suficiente para mapear as oportunidades de expansão e montar um plano de ativação — sem custo adicional, sem migração, sem risco.</p>
+    <div class="csm-card2">
+      <div class="csm-name">Amanda</div>
+      <div class="csm-role">Gerente de Contas · Ploomes</div>
+      <div class="csm-line"></div>
+      <div class="csm-contact-info">(11) 93401-2924 · Disponível pelo WhatsApp</div>
+    </div>
+    <div class="csm-btns">
+      <a href="https://wa.me/5511934012924" target="_blank" class="btn-wa-csm"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Chamar a Amanda no WhatsApp</a>
+      <a href="tel:+5511934012924" class="btn-tel-csm">📞 Ligar agora</a>
+    </div>
+  </div>
+</section><footer>
+  <div class="footer-wrap">
+    <div class="footer-top">
+      <div class="fb"><img src="data:image/png;base64,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" alt="Ploomes"><p>A maior empresa de CRM da América Latina. 2.600+ clientes da indústria centralizando 100% da operação comercial no Ploomes.</p></div>
+      <div class="fc"><h4>Plataforma</h4><a href="#roi">Objetivos estratégicos</a><a href="#tipos-venda">Modelos de venda</a><a href="#cpq">CPQ & Força de Vendas</a><a href="#gestao-op">Gestão Operacional</a><a href="#analytics">Analytics Pro</a></div>
+      <div class="fc"><h4>Recursos</h4><a href="#automacoes">Automações</a><a href="#ia">Inteligência Artificial</a><a href="#dev">Campo Dev</a><a href="#suporte">Suporte Técnico</a><a href="#diagnostico">Diagnóstico</a></div>
+      <div class="fc"><h4>Amanda · GC</h4><a href="https://wa.me/5511934012924" target="_blank">WhatsApp direto</a><a href="tel:+5511934012924">(11) 93401-2924</a><a href="mailto:contato@ploomes.com">contato@ploomes.com</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Ploomes. Todos os direitos reservados.</p><p>Nº1 CRM da América Latina · 2.600+ clientes</p></div>
+  </div>
+</footer><script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis') });
+},{threshold:0.06});
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navMenu').classList.remove('open'));
+});
+const secs = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    if(!a.classList.contains('nav-amanda')) a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--pl)' : '';
+  });
+});
+function openRoi(id, btn) {
+  document.querySelectorAll('.roi-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.roi-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('roi-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+function openSeg(id, btn) {
+  document.querySelectorAll('.seg-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.seg-tab').forEach(b => { b.className = 'seg-tab'; });
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('a' + id);
+}
+const catTotals = {'cat-crm':6,'cat-auto':5,'cat-canais':4,'cat-dados':4,'cat-ia':4};
+const catChecked = {'cat-crm':0,'cat-auto':0,'cat-canais':0,'cat-dados':0,'cat-ia':0};
+function toggleCheck(el, cat) {
+  const c = el.classList.toggle('checked');
+  catChecked[cat] += c ? 1 : -1;
+  updateDiag();
+}
+function toggleCat(id) { document.getElementById(id).classList.toggle('open'); }
+function updateDiag() {
+  const total = Object.values(catTotals).reduce((a,b)=>a+b,0);
+  const checked = Object.values(catChecked).reduce((a,b)=>a+b,0);
+  const pct = Math.round((checked/total)*100);
+  document.getElementById('diagBar').style.width = pct + '%';
+  document.getElementById('scoreDisplay').textContent = pct + '%';
+  Object.keys(catTotals).forEach(cat => {
+    document.getElementById('score-' + cat).textContent = catChecked[cat] + '/' + catTotals[cat];
+  });
+  let label = '', msg = '';
+  if(pct === 0) { label = 'Marque os itens que já utiliza'; return; }
+  else if(pct < 30) { label = '🔴 Potencial inicial — muito a explorar'; msg = 'Você está usando apenas o básico do Ploomes. Existe uma grande oportunidade de ganho com CPQ completo, automações e integrações. A Amanda pode montar um plano de ativação nas próximas semanas.'; }
+  else if(pct < 60) { label = '🟡 Em desenvolvimento — bom caminho'; msg = 'Você usa funcionalidades importantes, mas recursos como automações periódicas de carteira, Analytics Pro e gestão de contratos podem transformar sua operação industrial. A Amanda pode orientar os próximos passos.'; }
+  else if(pct < 85) { label = '🟢 Bom aproveitamento — avançando bem'; msg = 'Você usa uma boa parte do Ploomes. Os próximos ganhos virão de IA, Campo Dev e gestão avançada de distribuidores e contratos. A Amanda pode ajudar a chegar ao próximo nível.'; }
+  else { label = '🏆 Alta maturidade — referência no uso do Ploomes'; msg = 'Você está entre os clientes que mais extraem valor da plataforma. Vamos conversar sobre funcionalidades exclusivas e as novidades do roadmap que se aplicam à sua operação industrial.'; }
+  document.getElementById('scoreLabel').textContent = label;
+  const r = document.getElementById('diagResult');
+  r.classList.add('show');
+  document.getElementById('diagResultScore').textContent = pct + '%';
+  document.getElementById('diagResultLabel').textContent = label;
+  document.getElementById('diagResultMsg').textContent = msg;
+}
+</script>
+</body>
+</html>
